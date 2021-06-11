@@ -11,6 +11,11 @@ namespace TaskAPI_2_1.Controllers
     [ApiController]
     public class AgentsController : ControllerBase
     {
+        private readonly AgentInfo _agent;
+        AgentsController(AgentInfo agent)
+        {
+            _agent = agent;
+        }
         [HttpPost("register")]
         public IActionResult RegisterAgent([FromBody] AgentInfo agentInfo)
         {
@@ -31,7 +36,7 @@ namespace TaskAPI_2_1.Controllers
         [HttpGet("getlist")]
         public IActionResult GetListAgents()
         {
-            return Ok();
+            return Ok(_agent.AgentId);
         }
 
     }
