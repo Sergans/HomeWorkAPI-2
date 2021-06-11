@@ -28,6 +28,11 @@ namespace TaskAPI_2_1.Controllers
         {
             return Ok();
         }
+        [HttpGet("getlist")]
+        public IActionResult GetListAgents()
+        {
+            return Ok();
+        }
 
     }
     
