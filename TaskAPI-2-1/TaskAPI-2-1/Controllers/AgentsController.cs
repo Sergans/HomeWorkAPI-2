@@ -30,11 +30,6 @@ namespace TaskAPI_2_1.Controllers
         }
 
     }
-    public class AgentInfo
-    {
-        public int AgentId { get; }
-
-        public Uri AgentAddress { get; }
-    }
+    
 
 }
