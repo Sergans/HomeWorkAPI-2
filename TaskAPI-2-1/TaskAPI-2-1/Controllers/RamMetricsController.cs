@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskAPI_2_1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/metrics/ram")]
     [ApiController]
     public class RamMetricsController : ControllerBase
     {
