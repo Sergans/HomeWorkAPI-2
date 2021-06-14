@@ -29,7 +29,7 @@ namespace TaskAPI_2_1.Controllers
         {
             return Ok();
         }
-        [HttpGet("getlist")]
+        [HttpGet("registerlist")]
         public IActionResult GetListAgents()
         {
             return Ok();
