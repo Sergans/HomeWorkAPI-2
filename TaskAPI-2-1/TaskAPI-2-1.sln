@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAPI-2-1", "TaskAPI-2-1\TaskAPI-2-1.csproj", "{DC5BB480-8459-4AB8-8E65-5D911AB2CDDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskAPI-2-1", "TaskAPI-2-1\TaskAPI-2-1.csproj", "{DC5BB480-8459-4AB8-8E65-5D911AB2CDDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsAgent", "MetricsAgent\MetricsAgent.csproj", "{8682CDC2-6448-4511-BEB5-C6FEFD93A5D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DC5BB480-8459-4AB8-8E65-5D911AB2CDDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC5BB480-8459-4AB8-8E65-5D911AB2CDDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC5BB480-8459-4AB8-8E65-5D911AB2CDDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8682CDC2-6448-4511-BEB5-C6FEFD93A5D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8682CDC2-6448-4511-BEB5-C6FEFD93A5D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8682CDC2-6448-4511-BEB5-C6FEFD93A5D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8682CDC2-6448-4511-BEB5-C6FEFD93A5D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
