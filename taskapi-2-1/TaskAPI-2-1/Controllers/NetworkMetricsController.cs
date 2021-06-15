@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TaskAPI_2_1.Controllers
 {
-    [Route("api/metrics/ram")]
+    [Route("api/metrics/network")]
     [ApiController]
-    public class RamMetricsController : ControllerBase
+    public class NetworkMetricsController : ControllerBase
     {
         [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
