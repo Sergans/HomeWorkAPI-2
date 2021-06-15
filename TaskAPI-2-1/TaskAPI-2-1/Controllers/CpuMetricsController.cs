@@ -18,7 +18,7 @@ namespace TaskAPI_2_1.Controllers
             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
         }
-        [HttpGet("agent /{agentId}/from/{fromTime}/to/{toTime}")]
+        [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAgent([FromRoute]int agentId,[FromRoute]TimeSpan fromTime,[FromRoute]TimeSpan toTime)
         {
             _logger.LogInformation("Привет! Это наше первое сообщение в лог");
