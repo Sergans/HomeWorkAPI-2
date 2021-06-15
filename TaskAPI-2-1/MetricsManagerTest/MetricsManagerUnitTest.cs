@@ -113,7 +113,7 @@ namespace MetricsManagerTest
             _ = Assert.IsAssignableFrom<IActionResult>(result);
         }
     }
-    public class DotNetMetricsControllerUnitTest
+        public class DotNetMetricsControllerUnitTest
     {
         private DotNetMetricsController controller;
         public DotNetMetricsControllerUnitTest()
