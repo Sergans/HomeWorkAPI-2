@@ -2,6 +2,8 @@ using System;
 using Xunit;
 using TaskAPI_2_1.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 
 namespace MetricsManagerTest
 {

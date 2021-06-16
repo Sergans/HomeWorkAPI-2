@@ -13,6 +13,7 @@ namespace TaskAPI_2_1.Controllers
     public class CpuMetricsController : ControllerBase
     {
         private readonly ILogger<CpuMetricsController> _logger;
+
         public CpuMetricsController(ILogger<CpuMetricsController> logger)
         {
             _logger = logger;
