@@ -12,7 +12,7 @@ namespace MetricsAgent.Controllers
     public class AgentMetricsDotNetController : ControllerBase
     {
         [HttpGet("errors-count/from/{fromTime}/to/{toTime}")]
-        public IActionResult GetMetricsFromAgent([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
+        public IActionResult GetMetricsDotNet([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
         {
             return Ok();
         }

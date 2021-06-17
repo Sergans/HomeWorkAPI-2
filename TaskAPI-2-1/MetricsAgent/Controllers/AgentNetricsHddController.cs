@@ -12,7 +12,7 @@ namespace MetricsAgent.Controllers
     public class AgentNetricsHddController : ControllerBase
     {
         [HttpGet("left/from/{fromTime}/to/{toTime}")]
-        public IActionResult GetMetricsFromAgent([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
+        public IActionResult GetMetricsHdd([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
         {
             return Ok();
         }

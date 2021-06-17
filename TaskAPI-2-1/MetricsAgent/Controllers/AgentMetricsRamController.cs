@@ -12,7 +12,7 @@ namespace MetricsAgent.Controllers
     public class AgentMetricsRamController : ControllerBase
     {
         [HttpGet("available/from/{fromTime}/to/{toTime}")]
-        public IActionResult GetMetricsFromAgent([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
+        public IActionResult GetMetricsRam([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
         {
             return Ok();
         }

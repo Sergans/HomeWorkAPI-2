@@ -18,7 +18,7 @@ namespace MetricsAgentTest
         {
             var fromTime = TimeSpan.FromSeconds(0);
             var toTime = TimeSpan.FromSeconds(100);
-            var result = controller.GetMetricsFromAgent( fromTime, toTime);
+            var result = controller.GetMetricsCpu( fromTime, toTime);
             _ = Assert.IsAssignableFrom<IActionResult>(result);
 
         }
@@ -36,7 +36,7 @@ namespace MetricsAgentTest
            
                 var fromTime = TimeSpan.FromSeconds(0);
                 var toTime = TimeSpan.FromSeconds(100);
-                var result = controller.GetMetricsFromAgent(fromTime, toTime);
+                var result = controller.GetMetricsRam(fromTime, toTime);
                 _ = Assert.IsAssignableFrom<IActionResult>(result);
   
         }
@@ -55,7 +55,7 @@ namespace MetricsAgentTest
 
             var fromTime = TimeSpan.FromSeconds(0);
             var toTime = TimeSpan.FromSeconds(100);
-            var result = controller.GetMetricsFromAgent(fromTime, toTime);
+            var result = controller.GetMetricsDotNet(fromTime, toTime);
             _ = Assert.IsAssignableFrom<IActionResult>(result);
 
         }
@@ -73,7 +73,7 @@ namespace MetricsAgentTest
 
             var fromTime = TimeSpan.FromSeconds(0);
             var toTime = TimeSpan.FromSeconds(100);
-            var result = controller.GetMetricsFromAgent(fromTime, toTime);
+            var result = controller.GetMetricsNetWork(fromTime, toTime);
             _ = Assert.IsAssignableFrom<IActionResult>(result);
 
         }
