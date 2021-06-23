@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetricsManagerTest
 {
-    
-    
-        
+     
         public class CpuMetricsControllerUnitTests
 
       {
