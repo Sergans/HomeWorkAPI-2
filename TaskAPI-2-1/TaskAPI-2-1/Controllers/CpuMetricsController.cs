@@ -28,6 +28,7 @@ namespace TaskAPI_2_1.Controllers
         [HttpGet("cluster/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAllCluster([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
         {
+            _logger.LogInformation($"{fromTime},{toTime}");
             return Ok();
         }
        
