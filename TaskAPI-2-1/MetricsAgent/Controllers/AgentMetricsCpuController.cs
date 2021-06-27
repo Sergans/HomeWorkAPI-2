@@ -23,7 +23,7 @@ namespace MetricsAgent.Controllers
         public IActionResult GetMetricsFromAgent( [FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
-            return Ok(fromTime);
+            return Ok();
         }
 
 
