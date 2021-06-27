@@ -20,10 +20,10 @@ namespace MetricsAgent.Controllers
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
         }
         [HttpGet("from/{fromTime}/to/{toTime}")]
-        public IActionResult GetMetricsFromAgent( [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
+        public IActionResult GetMetricsFromAgent( [FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
-            return Ok();
+            return Ok(fromTime);
         }
 
 
