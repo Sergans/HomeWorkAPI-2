@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using MetricsAgent.DAL;
+using MetricsAgent.Model;
+
 
 namespace MetricsAgent.Controllers
 {
@@ -13,6 +16,14 @@ namespace MetricsAgent.Controllers
     public class AgentMetricsCpuController : ControllerBase
     {
         private readonly ILogger<AgentMetricsCpuController> _logger;
+        private ICpuMetricsRepository repository;
+
+        public AgentMetricsCpuController(ICpuMetricsRepository repository)
+        {
+            this.repository = repository;
+        }
+
+
 
         public AgentMetricsCpuController(ILogger<AgentMetricsCpuController> logger)
         {
@@ -23,8 +34,20 @@ namespace MetricsAgent.Controllers
         public IActionResult GetMetricsFromAgent( [FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
+
             return Ok();
         }
+        public IActionResult Create([FromBody] CpuMetricCreateRequest request)
+        {
+            repository.Create(new CpuMetric
+            {
+                Time = request.Time,
+                Value = request.Value
+            });
+
+            return Ok();
+        }
+
 
 
     }

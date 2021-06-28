@@ -11,7 +11,7 @@ namespace MetricsAgent.DAL
    public interface IRepository<T> where T : class
     {
         void Create(T item);
-        void GetByTimePeriod(T item);
+        T GetByTimePeriod(T item);
 
     }
     public interface ICpuMetricsRepository : IRepository<CpuMetric>
@@ -37,9 +37,32 @@ namespace MetricsAgent.DAL
 
         }
 
-        public void GetByTimePeriod(CpuMetric item)
+        public CpuMetric GetByTimePeriod(CpuMetric item)
         {
-            throw new NotImplementedException();
+            using var connection = new SQLiteConnection(ConnectionString);
+            connection.Open();
+            using var cmd = new SQLiteCommand(connection);
+            cmd.CommandText = "SELECT * FROM cpumetrics WHERE id=@id";
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                // если удалось что то прочитать
+                if (reader.Read())
+                {
+                    // возвращаем прочитанное
+                    return new CpuMetric
+                    {
+                        Id = reader.GetInt32(0),
+                        Value = reader.GetInt32(1),
+                        Time = TimeSpan.FromSeconds(reader.GetInt32(1))
+                    };
+                }
+                else
+                {
+                    // не нашлось запись по идентификатору, не делаем ничего
+                    return null;
+                }
+            }
+
         }
     }
 }
