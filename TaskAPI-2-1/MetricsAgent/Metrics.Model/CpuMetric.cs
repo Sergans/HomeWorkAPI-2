@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MetricsAgent
+namespace MetricsAgent.Model
 {
     public class CpuMetric
     {
@@ -11,7 +11,7 @@ namespace MetricsAgent
 
         public int Value { get; set; }
 
-        public long Time { get; set; }
+        public TimeSpan Time { get; set; }
 
     }
 }
