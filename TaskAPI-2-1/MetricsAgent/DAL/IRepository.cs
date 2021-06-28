@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MetricsAgent.Model;
+using System.Data.SQLite;
 
 
 namespace MetricsAgent.DAL
@@ -19,9 +20,21 @@ namespace MetricsAgent.DAL
     }
     public class CpuMetricsRepository : ICpuMetricsRepository
     {
+        private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+
         public void Create(CpuMetric item)
         {
-            throw new NotImplementedException();
+            using var connection = new SQLiteConnection(ConnectionString);
+            connection.Open();
+            using var cmd = new SQLiteCommand(connection);
+            cmd.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(@value, @time)";
+            cmd.Parameters.AddWithValue("@value", item.Value);
+            cmd.Parameters.AddWithValue("@time", item.Time.TotalSeconds);
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+
+
+
         }
 
         public void GetByTimePeriod(CpuMetric item)
