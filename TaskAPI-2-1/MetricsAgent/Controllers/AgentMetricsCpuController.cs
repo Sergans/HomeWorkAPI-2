@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MetricsAgent.DAL;
 using MetricsAgent.Model;
+using MetricsAgent.Requests;
+using MetricsAgent.Responses;
 
 
 namespace MetricsAgent.Controllers
