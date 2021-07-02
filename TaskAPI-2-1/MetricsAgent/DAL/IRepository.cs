@@ -11,7 +11,7 @@ namespace MetricsAgent.DAL
    public interface IRepository<T> where T : class
     {
         void Create(T item);
-        T GetByTimePeriod(T item);
+        IList<T> GetByTimePeriod(); 
 
     }
     public interface ICpuMetricsRepository : IRepository<CpuMetric>
@@ -37,31 +37,35 @@ namespace MetricsAgent.DAL
 
         }
 
-        public CpuMetric GetByTimePeriod(CpuMetric item)
+        public IList<CpuMetric> GetByTimePeriod()
         {
             using var connection = new SQLiteConnection(ConnectionString);
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "SELECT * FROM cpumetrics WHERE id=@id";
+
+            // прописываем в команду SQL запрос на получение всех данных из таблицы
+            cmd.CommandText = "SELECT * FROM cpumetrics";
+
+            var returnList = new List<CpuMetric>();
+
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
-                // если удалось что то прочитать
-                if (reader.Read())
+                // пока есть что читать -- читаем
+                while (reader.Read())
                 {
-                    // возвращаем прочитанное
-                    return new CpuMetric
+                    // добавляем объект в список возврата
+                    returnList.Add(new CpuMetric
                     {
                         Id = reader.GetInt32(0),
                         Value = reader.GetInt32(1),
-                        Time = TimeSpan.FromSeconds(reader.GetInt32(1))
-                    };
-                }
-                else
-                {
-                    // не нашлось запись по идентификатору, не делаем ничего
-                    return null;
+                        // налету преобразуем прочитанные секунды в метку времени
+                        Time = TimeSpan.FromSeconds(reader.GetInt32(2))
+                    });
                 }
             }
+
+            return returnList;
+
 
         }
     }

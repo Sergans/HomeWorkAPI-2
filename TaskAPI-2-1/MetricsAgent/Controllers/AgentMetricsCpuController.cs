@@ -39,6 +39,7 @@ namespace MetricsAgent.Controllers
 
             return Ok();
         }
+        [HttpPost("create")]
         public IActionResult Create([FromBody] CpuMetricCreateRequest request)
         {
             repository.Create(new CpuMetric
@@ -49,6 +50,24 @@ namespace MetricsAgent.Controllers
 
             return Ok();
         }
+        [HttpGet("all")]
+        public IActionResult GetByTimePeriod()
+        {
+            var metrics = repository.GetByTimePeriod();
+
+            var response = new AllCpuMetricsResponse()
+            {
+                Metrics = new List<CpuMetricDto>()
+            };
+
+            foreach (var metric in metrics)
+            {
+                response.Metrics.Add(new CpuMetricDto { Time = metric.Time, Value = metric.Value, Id = metric.Id });
+            }
+
+            return Ok(response);
+        }
+
 
 
 
