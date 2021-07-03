@@ -20,53 +20,52 @@ namespace MetricsAgent.Controllers
         private readonly ILogger<AgentMetricsCpuController> _logger;
         private ICpuMetricsRepository repository;
 
-        public AgentMetricsCpuController(ICpuMetricsRepository repository)
+        public AgentMetricsCpuController(ICpuMetricsRepository repository, ILogger<AgentMetricsCpuController> logger)
         {
             this.repository = repository;
+            
+            
+                _logger = logger;
+                _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
+           
         }
 
-
-
-        public AgentMetricsCpuController(ILogger<AgentMetricsCpuController> logger)
+        [HttpGet("from/{fromTime}/to/{toTime}")]
+        public IActionResult GetMetricsFromAgent([FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
         {
-            _logger = logger;
-            _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
-        }
-        //[HttpGet("from/{fromTime}/to/{toTime}")]
-        //public IActionResult GetMetricsFromAgent( [FromRoute] TimeSpan fromTime, [FromRoute] TimeSpan toTime)
-        //{
-        //    _logger.LogInformation($"{fromTime},{toTime}");
-
-        //    return Ok();
-        //}
-        [HttpPost("create")]
-        public IActionResult Create([FromBody] CpuMetricCreateRequest request)
-        {
-            //repository.Create(new CpuMetric
-            //{
-            //    Time = request.Time,
-            //    Value = request.Value
-            //});
+            _logger.LogInformation($"{fromTime},{toTime}");
 
             return Ok();
         }
-        //[HttpGet("all")]
-        //public IActionResult GetByTimePeriod()
-        //{
-        //    var metrics = repository.GetByTimePeriod();
+        [HttpPost("create")]
+        public IActionResult Create([FromBody] CpuMetricCreateRequest request)
+        {
 
-        //    var response = new AllCpuMetricsResponse()
-        //    {
-        //        Metrics = new List<CpuMetricDto>()
-        //    };
+            repository.Create(new CpuMetric
+            {
+                Time = request.Time,
+                Value = request.Value
+            });
 
-        //    foreach (var metric in metrics)
-        //    {
-        //        response.Metrics.Add(new CpuMetricDto { Time = metric.Time, Value = metric.Value, Id = metric.Id });
-        //    }
+            return Ok();
+        }
+        [HttpGet("all")]
+        public IActionResult GetByTimePeriod()
+        {
+            var metrics = repository.GetByTimePeriod();
 
-        //    return Ok(response);
-        //}
+            var response = new AllCpuMetricsResponse()
+            {
+                Metrics = new List<CpuMetricDto>()
+            };
+
+            foreach (var metric in metrics)
+            {
+                response.Metrics.Add(new CpuMetricDto { Time = metric.Time, Value = metric.Value, Id = metric.Id });
+            }
+
+            return Ok(response);
+        }
 
 
 

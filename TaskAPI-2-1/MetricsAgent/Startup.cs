@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using MetricsAgent.DAL;
 using MetricsAgent.Requests;
+using MetricsAgent.Model;
 
 
 
@@ -32,8 +33,9 @@ namespace MetricsAgent
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureSqlLiteConnection(services);
-            services.AddSingleton <CpuMetricCreateRequest>();
+          
             services.AddScoped<ICpuMetricsRepository, CpuMetricsRepository>();
+           
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
