@@ -11,7 +11,8 @@ namespace MetricsAgent.DAL
    public interface IRepository<T> where T : class
     {
         void Create(T item);
-        IList<T> GetByTimePeriod(); 
+        
+        IList<T> GetByTimePeriod();
 
     }
     public interface ICpuMetricsRepository : IRepository<CpuMetric>
@@ -36,6 +37,7 @@ namespace MetricsAgent.DAL
 
         }
 
+       
         public IList<CpuMetric> GetByTimePeriod()
         {
             using var connection = new SQLiteConnection(ConnectionString);
@@ -64,7 +66,6 @@ namespace MetricsAgent.DAL
             }
 
             return returnList;
-
 
         }
     }
