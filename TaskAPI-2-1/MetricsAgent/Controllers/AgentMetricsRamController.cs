@@ -41,5 +41,19 @@ namespace MetricsAgent.Controllers
             }
             return Ok(periodmetrics);
         }
+        [HttpPost("create")]
+        public IActionResult Create([FromBody] RamMetricCreateRequest request)
+        {
+            _logger.LogInformation($"{request.Time},{request.Value}");
+            repository.Create(new RamMetric
+            {
+
+                Time = request.Time,
+                Value = request.Value
+            });
+
+            return Ok();
+        }
+
     }
 }

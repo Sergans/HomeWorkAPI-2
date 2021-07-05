@@ -40,5 +40,18 @@ namespace MetricsAgent.Controllers
             }
             return Ok(periodmetrics);
         }
+        [HttpPost("create")]
+        public IActionResult Create([FromBody] NetWorkMetricCreateRequest request)
+        {
+            _logger.LogInformation($"{request.Time},{request.Value}");
+            repository.Create(new NetWorkMetric
+            {
+
+                Time = request.Time,
+                Value = request.Value
+            });
+
+            return Ok();
+        }
     }
 }

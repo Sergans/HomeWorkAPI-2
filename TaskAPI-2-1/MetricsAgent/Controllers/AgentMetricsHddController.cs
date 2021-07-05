@@ -42,5 +42,18 @@ namespace MetricsAgent.Controllers
             return Ok(periodmetrics);
            
         }
+        [HttpPost("create")]
+        public IActionResult Create([FromBody] HddMetricCreateRequest request)
+        {
+            _logger.LogInformation($"{request.Time},{request.Value}");
+            repository.Create(new HddMetric
+            {
+
+                Time = request.Time,
+                Value = request.Value
+            });
+
+            return Ok();
+        }
     }
 }
