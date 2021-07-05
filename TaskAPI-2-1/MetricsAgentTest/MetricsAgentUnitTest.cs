@@ -22,15 +22,16 @@ namespace MetricsAgentTest
             controller = new AgentMetricsCpuController(mock.Object,mocklog.Object);
         }
 
-        //[Fact]
-        //public void AgentMetricsCpu_ResultOk()
-        //{
-        //    var fromTime = DateTimeOffset.FromUnixTimeSeconds(1);
-        //    var toTime = DateTimeOffset.FromUnixTimeSeconds(100);
-        //    var result = controller.GetMetricsFromAgent(fromTime, toTime);
-        //    _ = Assert.IsAssignableFrom<IActionResult>(result);
-
-        //}
+        [Fact]
+        public void AgentMetricsCpu_ResultOk()
+        {
+           mock.Setup(repository => (repository.GetByTimePeriod())).Verifiable();
+          
+            var fromTime = DateTimeOffset.FromUnixTimeSeconds(0);
+            var toTime = DateTimeOffset.FromUnixTimeSeconds(0);
+            mock.Verify(repository => repository.GetByTimePeriod(), Times.AtMostOnce());
+           
+        }
         [Fact]
         public void Create_ShouldCall_Create_From_Repository()
         {
@@ -40,27 +41,27 @@ namespace MetricsAgentTest
         }
 
     }
-    public class AgentMetricsRamUnitTest
-    {
-        private Mock<ILogger<AgentMetricsRamController>> mock;
-        private AgentMetricsRamController controller;
-        public AgentMetricsRamUnitTest()
-        {
-           mock = new Mock<ILogger<AgentMetricsRamController>>();
-           controller = new AgentMetricsRamController(mock.Object);
-        }
-        [Fact]
-        public void AgentMetricsRam_ResultOk()
-        {
+    //public class AgentMetricsRamUnitTest
+    //{
+    //    private Mock<ILogger<AgentMetricsRamController>> mock;
+    //    private AgentMetricsRamController controller;
+    //    public AgentMetricsRamUnitTest()
+    //    {
+    //       mock = new Mock<ILogger<AgentMetricsRamController>>();
+    //       controller = new AgentMetricsRamController(mock.Object);
+    //    }
+    //    [Fact]
+    //    public void AgentMetricsRam_ResultOk()
+    //    {
            
-                var fromTime = TimeSpan.FromSeconds(0);
-                var toTime = TimeSpan.FromSeconds(100);
-                var result = controller.GetMetricsFromAgent(fromTime, toTime);
-                _ = Assert.IsAssignableFrom<IActionResult>(result);
+    //            var fromTime = TimeSpan.FromSeconds(0);
+    //            var toTime = TimeSpan.FromSeconds(100);
+    //            var result = controller.GetMetricsFromAgent(fromTime, toTime);
+    //            _ = Assert.IsAssignableFrom<IActionResult>(result);
   
-        }
+    //    }
        
-    }
+    //}
     //public class AgentMetricsDotNetUnitTest
     //{
     //    private AgentMetricsDotNetController controller;
