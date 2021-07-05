@@ -48,13 +48,14 @@ namespace MetricsAgent.Controllers
         [HttpPost("create")]
         public IActionResult Create([FromBody] CpuMetricCreateRequest request)
         {
-
+            _logger.LogInformation($"{request.Time},{request.Value}");
             repository.Create(new CpuMetric
             {
+
                 Time = request.Time,
                 Value = request.Value
             });
-
+           
             return Ok();
         }
        
