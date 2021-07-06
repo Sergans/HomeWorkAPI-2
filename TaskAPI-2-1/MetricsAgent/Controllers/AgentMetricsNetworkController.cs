@@ -14,11 +14,11 @@ namespace MetricsAgent.Controllers
 {
     [Route("api/metrics/network")]
     [ApiController]
-    public class AgentMetricsNetworkController : ControllerBase
+    public class AgentMetricsNetWorkController : ControllerBase
     {
-        private readonly ILogger<AgentMetricsNetworkController> _logger;
+        private readonly ILogger<AgentMetricsNetWorkController> _logger;
         private INetWorkMetricsRepository repository;
-        public AgentMetricsNetworkController(ILogger<AgentMetricsNetworkController> logger, INetWorkMetricsRepository repository)
+        public AgentMetricsNetWorkController(ILogger<AgentMetricsNetWorkController> logger, INetWorkMetricsRepository repository)
         {
             this.repository = repository;
             _logger = logger;

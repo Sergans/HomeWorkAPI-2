@@ -34,8 +34,11 @@ namespace MetricsAgent
         {
             ConfigureSqlLiteConnection(services);
           
-            services.AddScoped<ICpuMetricsRepository, CpuMetricsRepository>();
-           
+            services.AddSingleton<ICpuMetricsRepository, CpuMetricsRepository>();
+            services.AddSingleton<IRamMetricsRepository, RamMetricsRepository>();
+            services.AddSingleton<IHddMetricsRepository, HddMetricsRepository>();
+            services.AddSingleton<IDotNetMetricsRepository, DotNetMetricsRepository>();
+            services.AddSingleton<INetWorkMetricsRepository, NetWorkMetricsRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -67,6 +70,8 @@ namespace MetricsAgent
                     value INT, time INT)";
                 command.ExecuteNonQuery();
             }
+            
+
         }
 
 
