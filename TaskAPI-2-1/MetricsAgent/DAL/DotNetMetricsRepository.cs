@@ -16,7 +16,7 @@ namespace MetricsAgent.DAL
             using var connection = new SQLiteConnection(ConnectionString);
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(@value, @time)";
+            cmd.CommandText = "INSERT INTO dotnetmetrics(value, time) VALUES(@value, @time)";
             cmd.Parameters.AddWithValue("@value", item.Value);
             cmd.Parameters.AddWithValue("@time", item.Time.ToUnixTimeSeconds());
             cmd.Prepare();
@@ -32,7 +32,7 @@ namespace MetricsAgent.DAL
             using var cmd = new SQLiteCommand(connection);
 
             // прописываем в команду SQL запрос на получение всех данных из таблицы
-            cmd.CommandText = "SELECT * FROM cpumetrics";
+            cmd.CommandText = "SELECT * FROM dotnetmetrics";
 
             var returnList = new List<DotNetMetric>();
 
