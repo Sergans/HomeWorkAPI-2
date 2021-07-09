@@ -15,6 +15,8 @@ using System.Data.SQLite;
 using MetricsAgent.DAL;
 using MetricsAgent.Requests;
 using MetricsAgent.Model;
+using MetricsAgent.IConectionManager;
+
 
 
 
@@ -39,6 +41,7 @@ namespace MetricsAgent
             services.AddSingleton<IHddMetricsRepository, HddMetricsRepository>();
             services.AddSingleton<IDotNetMetricsRepository, DotNetMetricsRepository>();
             services.AddSingleton<INetWorkMetricsRepository, NetWorkMetricsRepository>();
+            services.AddSingleton<IConectionOpen,ConectionOpen>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

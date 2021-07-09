@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MetricsAgent.Model;
 using System.Data.SQLite;
+using MetricsAgent.IConectionManager;
 
 
 namespace MetricsAgent.DAL
@@ -37,11 +38,14 @@ namespace MetricsAgent.DAL
     }
     public class CpuMetricsRepository : ICpuMetricsRepository
     {
-        private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
-
+        
+        //private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+        
         public void Create(CpuMetric item)
         {
-            using var connection = new SQLiteConnection(ConnectionString);
+
+            IConectionOpen connectionstring = new ConectionOpen();
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
             cmd.CommandText = "INSERT INTO cpumetrics(value, time) VALUES(@value, @time)";
@@ -56,8 +60,10 @@ namespace MetricsAgent.DAL
        
         public IList<CpuMetric> GetByTimePeriod()
         {
-            using var connection = new SQLiteConnection(ConnectionString);
-            connection.Open();
+
+            IConectionOpen connectionstring = new ConectionOpen();
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+             connection.Open();
             using var cmd = new SQLiteCommand(connection);
 
             // прописываем в команду SQL запрос на получение всех данных из таблицы
@@ -73,10 +79,10 @@ namespace MetricsAgent.DAL
                     // добавляем объект в список возврата
                     returnList.Add(new CpuMetric
                     {
-                        Id = reader.GetInt32(0),
-                        Value = reader.GetInt32(1),
+                        Id = (int)reader.GetInt64(0),
+                        Value = (int)reader.GetInt64(1),
                         // налету преобразуем прочитанные секунды в метку времени
-                        Time = DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32(2))
+                        Time = DateTimeOffset.FromUnixTimeSeconds((int)reader.GetInt64(2))
                     });
                 }
             }
