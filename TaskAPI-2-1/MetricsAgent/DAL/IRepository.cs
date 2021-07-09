@@ -38,13 +38,9 @@ namespace MetricsAgent.DAL
     }
     public class CpuMetricsRepository : ICpuMetricsRepository
     {
-        
-        //private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
-        
+        IConectionOpen connectionstring = new ConectionOpen();
         public void Create(CpuMetric item)
         {
-
-            IConectionOpen connectionstring = new ConectionOpen();
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
@@ -53,15 +49,12 @@ namespace MetricsAgent.DAL
             cmd.Parameters.AddWithValue("@time",  item.Time.ToUnixTimeSeconds());
             cmd.Prepare();
             cmd.ExecuteNonQuery();
-            
-
+           
         }
 
        
         public IList<CpuMetric> GetByTimePeriod()
         {
-
-            IConectionOpen connectionstring = new ConectionOpen();
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
              connection.Open();
             using var cmd = new SQLiteCommand(connection);
