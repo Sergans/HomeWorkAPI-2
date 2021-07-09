@@ -17,6 +17,7 @@ namespace MetricsAgent.IConectionManager
         public string GetOpenedConection()
         {
             conect = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+
             return conect;
         }
     }
