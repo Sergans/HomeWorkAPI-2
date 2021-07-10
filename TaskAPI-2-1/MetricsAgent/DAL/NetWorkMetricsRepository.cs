@@ -25,7 +25,7 @@ namespace MetricsAgent.DAL
 
         }
 
-        public IList<NetWorkMetric> GetByTimePeriod()
+        public IList<NetWorkMetric> GetByTimePeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
         {
             using var connection = new SQLiteConnection(ConnectionString);
             connection.Open();

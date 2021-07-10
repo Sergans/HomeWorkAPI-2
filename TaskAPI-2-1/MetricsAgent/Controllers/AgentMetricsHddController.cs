@@ -30,7 +30,7 @@ namespace MetricsAgent.Controllers
         {
             _logger.LogInformation($"{fromTime},{toTime}");
             
-            var metrics = repository.GetByTimePeriod();
+            var metrics = repository.GetByTimePeriod(fromTime, toTime);
             var periodmetrics = new List<HddMetric>();
             foreach (var metric in metrics)
             {

@@ -29,7 +29,7 @@ namespace MetricsAgent.Controllers
         public IActionResult GetMetricsFromAgent([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
-            var metrics = repository.GetByTimePeriod();
+            var metrics = repository.GetByTimePeriod(fromTime, toTime);
             var periodmetrics = new List<DotNetMetric>();
             foreach (var metric in metrics)
             {

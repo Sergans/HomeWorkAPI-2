@@ -28,7 +28,7 @@ namespace MetricsAgent.DAL
 
             }
 
-            public IList<HddMetric> GetByTimePeriod()
+            public IList<HddMetric> GetByTimePeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
             {
                 using var connection = new SQLiteConnection(ConnectionString);
                 connection.Open();

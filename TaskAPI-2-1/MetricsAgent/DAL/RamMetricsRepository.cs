@@ -25,7 +25,7 @@ namespace MetricsAgent.DAL
 
 
         }
-        public IList<RamMetric> GetByTimePeriod()
+        public IList<RamMetric> GetByTimePeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
         {
             using var connection = new SQLiteConnection(ConnectionString);
             connection.Open();

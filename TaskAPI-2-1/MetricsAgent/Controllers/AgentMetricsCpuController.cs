@@ -34,16 +34,16 @@ namespace MetricsAgent.Controllers
         public IActionResult GetMetricsFromAgent([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
-            var metrics = repository.GetByTimePeriod();
-            var periodmetrics = new List<CpuMetric>();
-            foreach (var metric in metrics)
-            {
-                if (metric.Time > fromTime && metric.Time < toTime)
-                {
-                    periodmetrics.Add(metric);
-                }
-            }
-            return Ok(periodmetrics);
+            var metrics = repository.GetByTimePeriod(fromTime,toTime);
+            //var periodmetrics = new List<CpuMetric>();
+            //foreach (var metric in metrics)
+            //{
+            //    if (metric.Time > fromTime && metric.Time < toTime)
+            //    {
+            //        periodmetrics.Add(metric);
+            //    }
+            //}
+            return Ok(metrics);
         }
         [HttpPost("create")]
         public IActionResult Create([FromBody] CpuMetricCreateRequest request)
@@ -55,7 +55,7 @@ namespace MetricsAgent.Controllers
                 Time = request.Time,
                 Value = request.Value
             });
-           
+
             return Ok();
         }
        

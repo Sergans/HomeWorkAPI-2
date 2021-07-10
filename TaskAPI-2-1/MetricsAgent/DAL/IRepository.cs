@@ -13,7 +13,7 @@ namespace MetricsAgent.DAL
     {
         void Create(T item);
         
-        IList<T> GetByTimePeriod();
+        IList<T> GetByTimePeriod(DateTimeOffset fromTime,DateTimeOffset toTime);
 
     }
     public interface ICpuMetricsRepository : IRepository<CpuMetric>
@@ -53,14 +53,19 @@ namespace MetricsAgent.DAL
         }
 
        
-        public IList<CpuMetric> GetByTimePeriod()
+        public IList<CpuMetric> GetByTimePeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
         {
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
              connection.Open();
             using var cmd = new SQLiteCommand(connection);
 
             // прописываем в команду SQL запрос на получение всех данных из таблицы
-            cmd.CommandText = "SELECT id,value,time * FROM cpumetrics WHERE time>@fromtime AND time<@totime";
+             cmd.CommandText = "SELECT id,value,time FROM cpumetrics WHERE time>@fromTime AND time<@toTime";
+            cmd.Parameters.AddWithValue("@fromTime", fromTime.ToUnixTimeSeconds());
+            cmd.Parameters.AddWithValue("@toTime", toTime.ToUnixTimeSeconds());
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "SELECT * FROM cpumetrics";
 
             var returnList = new List<CpuMetric>();
 
