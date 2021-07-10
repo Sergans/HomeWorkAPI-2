@@ -4,17 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using MetricsAgent.Model;
 using System.Data.SQLite;
+using MetricsAgent.IConectionManager;
 
 
 namespace MetricsAgent.DAL
 {
     public class RamMetricsRepository:IRamMetricsRepository
     {
-        private const string ConnectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
-
+        
+        IConectionOpen connectionstring = new ConectionOpen();
         public void Create(RamMetric item)
         {
-            using var connection = new SQLiteConnection(ConnectionString);
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+            
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
             cmd.CommandText = "INSERT INTO rammetrics(value, time) VALUES(@value, @time)";
@@ -27,12 +29,17 @@ namespace MetricsAgent.DAL
         }
         public IList<RamMetric> GetByTimePeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
         {
-            using var connection = new SQLiteConnection(ConnectionString);
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+            
             connection.Open();
             using var cmd = new SQLiteCommand(connection);
 
             // прописываем в команду SQL запрос на получение всех данных из таблицы
-            cmd.CommandText = "SELECT * FROM rammetrics";
+            cmd.CommandText = "SELECT id,value,time FROM rammetrics WHERE time>@fromTime AND time<@toTime";
+            cmd.Parameters.AddWithValue("@fromTime", fromTime.ToUnixTimeSeconds());
+            cmd.Parameters.AddWithValue("@toTime", toTime.ToUnixTimeSeconds());
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
 
             var returnList = new List<RamMetric>();
 

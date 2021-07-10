@@ -30,15 +30,8 @@ namespace MetricsAgent.Controllers
         {
             _logger.LogInformation($"{fromTime},{toTime}");
             var metrics = repository.GetByTimePeriod(fromTime, toTime);
-            var periodmetrics = new List<DotNetMetric>();
-            foreach (var metric in metrics)
-            {
-                if (metric.Time > fromTime && metric.Time < toTime)
-                {
-                    periodmetrics.Add(metric);
-                }
-            }
-            return Ok(periodmetrics);
+            
+            return Ok(metrics);
             
         }
         [HttpPost("create")]
