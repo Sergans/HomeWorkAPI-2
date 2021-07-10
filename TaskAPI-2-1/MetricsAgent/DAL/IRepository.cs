@@ -60,7 +60,7 @@ namespace MetricsAgent.DAL
             using var cmd = new SQLiteCommand(connection);
 
             // прописываем в команду SQL запрос на получение всех данных из таблицы
-            cmd.CommandText = "SELECT * FROM cpumetrics";
+            cmd.CommandText = "SELECT id,value,time * FROM cpumetrics WHERE time>@fromtime AND time<@totime";
 
             var returnList = new List<CpuMetric>();
 
