@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data;
 
+
 namespace MetricsAgent.DAL
 {
     public class TimeSpanHandler : SqlMapper.TypeHandler<DateTimeOffset>

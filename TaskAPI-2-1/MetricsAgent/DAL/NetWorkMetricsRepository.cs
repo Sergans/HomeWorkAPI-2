@@ -5,63 +5,38 @@ using System.Threading.Tasks;
 using MetricsAgent.Model;
 using System.Data.SQLite;
 using MetricsAgent.IConectionManager;
+using Dapper;
 
 namespace MetricsAgent.DAL
 {
     public class NetWorkMetricsRepository:INetWorkMetricsRepository
     {
-        
+        public NetWorkMetricsRepository()
+        {
+            SqlMapper.AddTypeHandler(new TimeSpanHandler());
+        }
+
 
         IConectionOpen connectionstring = new ConectionOpen();
         public void Create(NetWorkMetric item)
         {
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
-           
-            connection.Open();
-            using var cmd = new SQLiteCommand(connection);
-            cmd.CommandText = "INSERT INTO networkmetrics(value, time) VALUES(@value, @time)";
-            cmd.Parameters.AddWithValue("@value", item.Value);
-            cmd.Parameters.AddWithValue("@time", item.Time.ToUnixTimeSeconds());
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
-
-
+            connection.Execute("INSERT INTO networkmetrics(value, time) VALUES(@value, @time)",
+                new
+                {
+                    value = item.Value,
+                    time = item.Time.ToUnixTimeSeconds()
+                });
         }
 
         public IList<NetWorkMetric> GetByTimePeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
         {
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
-            
-            connection.Open();
-            using var cmd = new SQLiteCommand(connection);
-
-            // прописываем в команду SQL запрос на получение всех данных из таблицы
-            cmd.CommandText = "SELECT id,value,time FROM networkmetrics WHERE time>@fromTime AND time<@toTime";
-            cmd.Parameters.AddWithValue("@fromTime", fromTime.ToUnixTimeSeconds());
-            cmd.Parameters.AddWithValue("@toTime", toTime.ToUnixTimeSeconds());
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
-
-            var returnList = new List<NetWorkMetric>();
-
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            return connection.Query<NetWorkMetric>("SELECT id,value,time FROM networkmetrics WHERE time>@fromTime AND time<@toTime", new
             {
-                // пока есть что читать -- читаем
-                while (reader.Read())
-                {
-                    // добавляем объект в список возврата
-                    returnList.Add(new NetWorkMetric
-                    {
-                        Id = (int)reader.GetInt64(0),
-                        Value = (int)reader.GetInt64(1),
-                        // налету преобразуем прочитанные секунды в метку времени
-                        Time = DateTimeOffset.FromUnixTimeSeconds((int)reader.GetInt64(2))
-                    });
-                }
-            }
-
-            return returnList;
-
+                fromTime = fromTime.ToUnixTimeSeconds(),
+                toTime = toTime.ToUnixTimeSeconds()
+            }).ToList();
         }
     }
 }
