@@ -12,7 +12,7 @@ namespace MetricsAgent.DAL
     {
         public override DateTimeOffset Parse(object value)
         
-            => DateTimeOffset.FromUnixTimeSeconds((Int32)value);
+            => DateTimeOffset.FromUnixTimeSeconds((Int64)value);
         
         public override void SetValue(IDbDataParameter parameter, DateTimeOffset value)
             => parameter.Value = value;

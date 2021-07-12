@@ -17,6 +17,7 @@ using MetricsAgent.Requests;
 using MetricsAgent.Model;
 using MetricsAgent.IConectionManager;
 using AutoMapper;
+using FluentMigrator.Runner;
 
 
 
@@ -31,7 +32,7 @@ namespace MetricsAgent
         }
 
         public IConfiguration Configuration { get; }
-
+       private const string connectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -45,6 +46,16 @@ namespace MetricsAgent
             services.AddSingleton<INetWorkMetricsRepository, NetWorkMetricsRepository>();
             services.AddSingleton<IConectionOpen,ConectionOpen>();
             services.AddSingleton(mapper);
+            services.AddFluentMigratorCore()
+                .ConfigureRunner(rb => rb
+                    // добавляем поддержку SQLite 
+                    .AddSQLite()
+                    // устанавливаем строку подключения
+                    .WithGlobalConnectionString(connectionString)
+                    // подсказываем где искать классы с миграциями
+                    .ScanIn(typeof(Startup).Assembly).For.Migrations()
+                ).AddLogging(lb => lb
+                    .AddFluentMigratorConsole());
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -68,10 +79,10 @@ namespace MetricsAgent
             {
                // задаем новый текст команды для выполнения
                 // удаляем таблицу с метриками если она существует в базе данных
-                command.CommandText = "DROP TABLE IF EXISTS cpumetrics";
+                //command.CommandText = "DROP TABLE IF EXISTS cpumetrics";
 
                // отправляем запрос в базу данных
-                command.ExecuteNonQuery();
+                //command.ExecuteNonQuery();
                 command.CommandText = "DROP TABLE IF EXISTS hddmetrics";
                 command.ExecuteNonQuery();
                 command.CommandText = "DROP TABLE IF EXISTS rammetrics";
@@ -80,9 +91,9 @@ namespace MetricsAgent
                 command.ExecuteNonQuery();
                 command.CommandText = "DROP TABLE IF EXISTS networkmetrics";
                 command.ExecuteNonQuery();
-                command.CommandText = @"CREATE TABLE cpumetrics(id INTEGER PRIMARY KEY,
-                    value INT, time INT)";
-                command.ExecuteNonQuery();
+                //command.CommandText = @"CREATE TABLE cpumetrics(id INTEGER PRIMARY KEY,
+                // value INT, time INT)";
+                //command.ExecuteNonQuery();
                 command.CommandText = @"CREATE TABLE dotnetmetrics(id INTEGER PRIMARY KEY,
                     value INT, time INT)";
                 command.ExecuteNonQuery();
@@ -103,7 +114,7 @@ namespace MetricsAgent
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMigrationRunner migrationRunner)
         {
             if (env.IsDevelopment())
             {
@@ -122,6 +133,7 @@ namespace MetricsAgent
             {
                 endpoints.MapControllers();
             });
+            migrationRunner.MigrateUp();
         }
     }
 }
