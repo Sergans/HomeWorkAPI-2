@@ -16,6 +16,7 @@ using MetricsAgent.DAL;
 using MetricsAgent.Requests;
 using MetricsAgent.Model;
 using MetricsAgent.IConectionManager;
+using AutoMapper;
 
 
 
@@ -34,15 +35,18 @@ namespace MetricsAgent
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var mapperConfiguration = new MapperConfiguration(mp => mp.AddProfile(new MapperProfile()));
+            var mapper = mapperConfiguration.CreateMapper();
             ConfigureSqlLiteConnection(services);
-          
             services.AddSingleton<ICpuMetricsRepository, CpuMetricsRepository>();
             services.AddSingleton<IRamMetricsRepository, RamMetricsRepository>();
             services.AddSingleton<IHddMetricsRepository, HddMetricsRepository>();
             services.AddSingleton<IDotNetMetricsRepository, DotNetMetricsRepository>();
             services.AddSingleton<INetWorkMetricsRepository, NetWorkMetricsRepository>();
             services.AddSingleton<IConectionOpen,ConectionOpen>();
+            services.AddSingleton(mapper);
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MetricsAgent", Version = "v1" });
