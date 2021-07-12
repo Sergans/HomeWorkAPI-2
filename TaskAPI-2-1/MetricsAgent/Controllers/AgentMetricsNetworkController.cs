@@ -9,6 +9,7 @@ using MetricsAgent.DAL;
 using MetricsAgent.Model;
 using MetricsAgent.Requests;
 using MetricsAgent.Responses;
+using AutoMapper;
 
 namespace MetricsAgent.Controllers
 {
@@ -16,10 +17,12 @@ namespace MetricsAgent.Controllers
     [ApiController]
     public class AgentMetricsNetWorkController : ControllerBase
     {
+        private readonly IMapper mapper;
         private readonly ILogger<AgentMetricsNetWorkController> _logger;
         private INetWorkMetricsRepository repository;
-        public AgentMetricsNetWorkController(ILogger<AgentMetricsNetWorkController> logger, INetWorkMetricsRepository repository)
+        public AgentMetricsNetWorkController(ILogger<AgentMetricsNetWorkController> logger, INetWorkMetricsRepository repository, IMapper mapper)
         {
+            this.mapper = mapper;
             this.repository = repository;
             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
@@ -30,8 +33,16 @@ namespace MetricsAgent.Controllers
             _logger.LogInformation($"{fromTime},{toTime}");
 
             var metrics = repository.GetByTimePeriod(fromTime, toTime);
-            
-            return Ok(metrics);
+            var response = new AllNetWorkMetricsResponse()
+            {
+                Metrics = new List<NetWorkMetricDto>()
+            };
+            foreach (var metric in metrics)
+            {
+                response.Metrics.Add(mapper.Map<NetWorkMetricDto>(metric));
+            }
+
+            return Ok(response);
         }
         [HttpPost("create")]
         public IActionResult Create([FromBody] NetWorkMetricCreateRequest request)

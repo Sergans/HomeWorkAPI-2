@@ -9,6 +9,7 @@ using MetricsAgent.DAL;
 using MetricsAgent.Model;
 using MetricsAgent.Requests;
 using MetricsAgent.Responses;
+using AutoMapper;
 
 
 namespace MetricsAgent.Controllers
@@ -19,15 +20,15 @@ namespace MetricsAgent.Controllers
     {
         private readonly ILogger<AgentMetricsCpuController> _logger;
         private ICpuMetricsRepository repository;
+        private readonly IMapper mapper;
 
-        public AgentMetricsCpuController(ICpuMetricsRepository repository, ILogger<AgentMetricsCpuController> logger)
+        public AgentMetricsCpuController(ICpuMetricsRepository repository, ILogger<AgentMetricsCpuController> logger,IMapper mapper)
         {
             this.repository = repository;
-            
-            
-                _logger = logger;
-                _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
-           
+            this.mapper = mapper;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
+          
         }
 
         [HttpGet("from/{fromTime}/to/{toTime}")]
@@ -35,8 +36,16 @@ namespace MetricsAgent.Controllers
         {
             _logger.LogInformation($"{fromTime},{toTime}");
             var metrics = repository.GetByTimePeriod(fromTime,toTime);
-           
-            return Ok(metrics);
+            var response = new AllCpuMetricsResponse()
+            {
+                Metrics = new List<CpuMetricDto>()
+            };
+            foreach (var metric in metrics)
+            {
+                response.Metrics.Add(mapper.Map<CpuMetricDto>(metric));
+            }
+
+            return Ok(response);
         }
         [HttpPost("create")]
         public IActionResult Create([FromBody] CpuMetricCreateRequest request)

@@ -9,6 +9,7 @@ using MetricsAgent.DAL;
 using MetricsAgent.Model;
 using MetricsAgent.Requests;
 using MetricsAgent.Responses;
+using AutoMapper;
 
 namespace MetricsAgent.Controllers
 {
@@ -16,10 +17,12 @@ namespace MetricsAgent.Controllers
     [ApiController]
     public class AgentMetricsRamController : ControllerBase
     {
+        private readonly IMapper mapper;
         private readonly ILogger<AgentMetricsRamController> _logger;
         private IRamMetricsRepository repository;
-        public AgentMetricsRamController(ILogger<AgentMetricsRamController> logger, IRamMetricsRepository repository)
+        public AgentMetricsRamController(ILogger<AgentMetricsRamController> logger, IRamMetricsRepository repository, IMapper mapper)
         {
+            this.mapper = mapper;
             this.repository = repository;
             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
@@ -31,8 +34,16 @@ namespace MetricsAgent.Controllers
             _logger.LogInformation($"{fromTime},{toTime}");
 
             var metrics = repository.GetByTimePeriod(fromTime, toTime);
-            
-            return Ok(metrics);
+            var response = new AllRamMetricsResponse()
+            {
+                Metrics = new List<RamMetricDto>()
+            };
+            foreach (var metric in metrics)
+            {
+                response.Metrics.Add(mapper.Map<RamMetricDto>(metric));
+            }
+
+            return Ok(response);
         }
         [HttpPost("create")]
         public IActionResult Create([FromBody] RamMetricCreateRequest request)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MetricsAgent.Responses
 {
-    public class AllNetWorkMetricsNetWork
+    public class AllNetWorkMetricsResponse
     {
         public List<NetWorkMetricDto> Metrics { get; set; }
     }
