@@ -21,6 +21,8 @@ using FluentMigrator.Runner;
 using Quartz;
 using MetricsAgent.Jobs;
 using Quartz.Spi;
+using Quartz.Impl;
+
 
 
 
@@ -60,7 +62,7 @@ namespace MetricsAgent
                 ).AddLogging(lb => lb
                     .AddFluentMigratorConsole());
             services.AddSingleton<IJobFactory, SingletonJobFactory>();
-            services.AddSingleton<ISchedulerFactory>();
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             // добавляем нашу задачу
             services.AddSingleton<CpuMetricJob>();
             services.AddSingleton(new JobSchedule(
