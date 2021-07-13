@@ -8,6 +8,7 @@ using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz.Spi;
 using Microsoft.Extensions.Hosting;
+using System.Threading;
 
 
 namespace MetricsAgent.Jobs

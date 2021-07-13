@@ -71,6 +71,7 @@ namespace MetricsAgent
             //    cronExpression: "0/5 * * * * ?"));
 
             services.AddControllers();
+            services.AddHostedService<QuartzHostedService>();
 
             services.AddSwaggerGen(c =>
             {
