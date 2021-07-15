@@ -9,22 +9,33 @@ using Microsoft.Extensions.DependencyInjection;
 using Quartz.Spi;
 using Microsoft.Extensions.Hosting;
 using System.Threading;
+using MetricsAgent.Model;
+
+
+
 
 
 namespace MetricsAgent.Jobs
 {
-    public class CpuMetricJob:IJob
+    public class CpuMetricJob : IJob
     {
+
         private ICpuMetricsRepository _repository;
+        private PerformanceCounter  _cpuCounter; 
 
         public CpuMetricJob(ICpuMetricsRepository repository)
         {
             _repository = repository;
+            _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+
         }
 
         public Task Execute(IJobExecutionContext context)
         {
             // теперь можно записать что-то при помощи репозитория
+            var cpuUsageInPercents = Convert.ToInt32(_cpuCounter.NextValue());
+            var time = DateTimeOffset.Now;
+            _repository.Create(new Model.CpuMetric { Time = time, Value = cpuUsageInPercents });
 
             return Task.CompletedTask;
         }
