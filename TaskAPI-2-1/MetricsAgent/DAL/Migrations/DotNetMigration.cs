@@ -6,12 +6,12 @@ using FluentMigrator;
 
 namespace MetricsAgent.DAL.Migrations
 {
-    [Migration(1)]
-    public class FirstMigration:Migration
+   [Migration(3)]
+    public class DotNetMigration:Migration
     {
         public override void Up()
         {
-            Create.Table("cpumetrics")
+            Create.Table("dotnetmetrics")
                 .WithColumn("Id").AsInt64().PrimaryKey().Identity()
                 .WithColumn("Value").AsInt32()
                 .WithColumn("Time").AsInt64();
@@ -19,8 +19,7 @@ namespace MetricsAgent.DAL.Migrations
 
         public override void Down()
         {
-            Delete.Table("cpumetrics");
+            Delete.Table("dotnetmetrics");
         }
-
     }
 }
