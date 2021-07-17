@@ -65,12 +65,13 @@ namespace MetricsAgent
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             // добавляем нашу задачу
             services.AddSingleton<CpuMetricJob>();
+            services.AddSingleton<RamMetricJob>();
             services.AddSingleton(new JobSchedule(
                 jobType: typeof(CpuMetricJob),
                 cronExpression: "0/5 * * * * ?")); // запускать каждые 5 секунд
-            //services.AddSingleton(new JobSchedule(
-            //    jobType: typeof(RamMetricJob),
-            //    cronExpression: "0/5 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+                jobType: typeof(RamMetricJob),
+                cronExpression: "0/5 * * * * ?"));
 
             services.AddControllers();
             services.AddHostedService<QuartzHostedService>();
@@ -86,11 +87,8 @@ namespace MetricsAgent
         private void ConfigureSqlLiteConnection(IServiceCollection services)
         {
             IConectionOpen connectionstring = new ConectionOpen();
-            // const string connectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
-            string connectionString = connectionstring.GetOpenedConection();
-            //var connection = new SQLiteConnection(connectionString);
-            //connection.Open();
-            //PrepareSchema(connection);
+             string connectionString = connectionstring.GetOpenedConection();
+            
         }
        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
