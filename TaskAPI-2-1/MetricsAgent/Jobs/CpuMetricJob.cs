@@ -74,7 +74,8 @@ namespace MetricsAgent.Jobs
         private readonly IEnumerable<JobSchedule> _jobSchedules;
 
         public QuartzHostedService(
-            ICpuMetricsRepository repository,IRamMetricsRepository repositoryram,
+            ICpuMetricsRepository repository,IRamMetricsRepository repositoryram, IHddMetricsRepository repositoryhdd,
+            IDotNetMetricsRepository repositorydotnet, INetWorkMetricsRepository repositorynetwork,
             ISchedulerFactory schedulerFactory,
             IJobFactory jobFactory,
             IEnumerable<JobSchedule> jobSchedules)

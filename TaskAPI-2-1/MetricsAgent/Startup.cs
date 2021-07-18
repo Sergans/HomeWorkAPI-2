@@ -66,11 +66,23 @@ namespace MetricsAgent
             // добавляем нашу задачу
             services.AddSingleton<CpuMetricJob>();
             services.AddSingleton<RamMetricJob>();
+            services.AddSingleton<HddMetricJob>();
+            services.AddSingleton<DotNetMetricJob>();
+            services.AddSingleton<NetWorkMetricJob>();
             services.AddSingleton(new JobSchedule(
                 jobType: typeof(CpuMetricJob),
                 cronExpression: "0/5 * * * * ?")); // запускать каждые 5 секунд
             services.AddSingleton(new JobSchedule(
                 jobType: typeof(RamMetricJob),
+                cronExpression: "0/5 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+                jobType: typeof(HddMetricJob),
+                cronExpression: "0/5 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+                jobType: typeof(DotNetMetricJob),
+                cronExpression: "0/5 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+                jobType: typeof(NetWorkMetricJob),
                 cronExpression: "0/5 * * * * ?"));
 
             services.AddControllers();
