@@ -13,6 +13,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using FluentMigrator.Runner;
+using TaskAPI_2_1.DAL.Repository;
+using TaskAPI_2_1.IConectionManager;
 
 
 
@@ -43,6 +45,8 @@ namespace TaskAPI_2_1
                ).AddLogging(lb => lb
                    .AddFluentMigratorConsole());
             services.AddControllers();
+            services.AddSingleton<IConectionOpen, ConectionOpen>();
+             services.AddSingleton<IAgentCpuMetric, AgentCpuMetric>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskAPI_2_1", Version = "v1" });
