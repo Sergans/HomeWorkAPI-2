@@ -11,6 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data.SQLite;
+using FluentMigrator.Runner;
+
+
+
 
 namespace TaskAPI_2_1
 {
@@ -20,22 +25,38 @@ namespace TaskAPI_2_1
         {
             Configuration = configuration;
         }
-
+        private const string connectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+            ConfigureSqlLiteConnection(services);
+            services.AddFluentMigratorCore()
+               .ConfigureRunner(rb => rb
+                   // добавляем поддержку SQLite 
+                   .AddSQLite()
+                   // устанавливаем строку подключения
+                   .WithGlobalConnectionString(connectionString)
+                   // подсказываем где искать классы с миграциями
+                   .ScanIn(typeof(Startup).Assembly).For.Migrations()
+               ).AddLogging(lb => lb
+                   .AddFluentMigratorConsole());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskAPI_2_1", Version = "v1" });
             });
         }
+        private void ConfigureSqlLiteConnection(IServiceCollection services)
+        {
+            //IConectionOpen connectionstring = new ConectionOpen();
+            //string connectionString = connectionstring.GetOpenedConection();
+            string connectionString = "Data Source=metrics.db;Version=3;Pooling=true;Max Pool Size=100;";
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMigrationRunner migrationRunner)
         {
             if (env.IsDevelopment())
             {
@@ -54,6 +75,7 @@ namespace TaskAPI_2_1
             {
                 endpoints.MapControllers();
             });
+            migrationRunner.MigrateUp();
         }
     }
 }
