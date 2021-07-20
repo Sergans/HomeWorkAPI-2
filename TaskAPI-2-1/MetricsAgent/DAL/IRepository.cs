@@ -41,7 +41,7 @@ namespace MetricsAgent.DAL
     {
         public CpuMetricsRepository()
         {
-            SqlMapper.AddTypeHandler(new TimeSpanHandler());
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
         }
         IConectionOpen connectionstring = new ConectionOpen();
         public void Create(CpuMetric item)

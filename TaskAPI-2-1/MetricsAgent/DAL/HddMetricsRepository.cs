@@ -16,7 +16,7 @@ namespace MetricsAgent.DAL
         {
         public HddMetricsRepository()
         {
-            SqlMapper.AddTypeHandler(new TimeSpanHandler());
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
         }
 
         IConectionOpen connectionstring = new ConectionOpen();

@@ -8,7 +8,7 @@ using System.Data;
 
 namespace MetricsAgent.DAL
 {
-    public class TimeSpanHandler : SqlMapper.TypeHandler<DateTimeOffset>
+    public class DateTimeOffsetHandler : SqlMapper.TypeHandler<DateTimeOffset>
     {
         public override DateTimeOffset Parse(object value)
         

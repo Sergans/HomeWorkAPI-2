@@ -21,6 +21,10 @@ namespace TaskAPI_2_1.DAL.Repository
     }
     public class AgentCpuMetric:IAgentCpuMetric
     {
+        public AgentCpuMetric()
+        {
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
+        }
         IConectionOpen connectionstring = new ConectionOpen();
         public IList<CpuAgent> GetAgentMetricPeriod(int agentId, DateTimeOffset fromTime, DateTimeOffset toTime)
         {

@@ -13,7 +13,7 @@ namespace MetricsAgent.DAL
     {
         public NetWorkMetricsRepository()
         {
-            SqlMapper.AddTypeHandler(new TimeSpanHandler());
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
         }
 
 

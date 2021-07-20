@@ -14,7 +14,7 @@ namespace MetricsAgent.DAL
     {
         public RamMetricsRepository()
         {
-            SqlMapper.AddTypeHandler(new TimeSpanHandler());
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
         }
 
         IConectionOpen connectionstring = new ConectionOpen();
