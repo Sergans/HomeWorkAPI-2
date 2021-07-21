@@ -29,10 +29,11 @@ namespace TaskAPI_2_1.DAL.Repository
         public IList<CpuAgent> GetAgentMetricPeriod(int agentId, DateTimeOffset fromTime, DateTimeOffset toTime)
         {
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
-            return connection.Query<CpuAgent>("SELECT id,agentId,value,time FROM cpuagentmetrics WHERE time>@fromTime AND time<@toTime", new
+            return connection.Query<CpuAgent>("SELECT id,agentId,value,time FROM cpuagentmetrics WHERE agentId=@agentId AND time>@fromTime AND time<@toTime", new
             {
                 fromTime = fromTime.ToUnixTimeSeconds(),
-                toTime = toTime.ToUnixTimeSeconds()
+                toTime = toTime.ToUnixTimeSeconds(),
+                agentId=agentId.ToString()
             }).ToList();
         }
     }
