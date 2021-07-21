@@ -14,7 +14,8 @@ namespace TaskAPI_2_1.DAL.Repository
    public interface IRepository<T>where T:class
    {
       IList<T> GetAgentMetricPeriod(int agentId, DateTimeOffset fromTime, DateTimeOffset toTime);
-   }
+      IList<T> GetAllMetricPeriod(DateTimeOffset fromTime, DateTimeOffset toTime);
+    }
     public interface IAgentCpuMetric : IRepository<CpuAgent>
     {
         
@@ -34,6 +35,16 @@ namespace TaskAPI_2_1.DAL.Repository
                 fromTime = fromTime.ToUnixTimeSeconds(),
                 toTime = toTime.ToUnixTimeSeconds(),
                 agentId=agentId.ToString()
+            }).ToList();
+        }
+        public IList<CpuAgent> GetAllMetricPeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
+        {
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+            return connection.Query<CpuAgent>("SELECT id,agentId,value,time FROM cpuagentmetrics WHERE time>@fromTime AND time<@toTime", new
+            {
+                fromTime = fromTime.ToUnixTimeSeconds(),
+                toTime = toTime.ToUnixTimeSeconds(),
+                
             }).ToList();
         }
     }
