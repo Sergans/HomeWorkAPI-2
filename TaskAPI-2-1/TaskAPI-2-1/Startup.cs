@@ -45,6 +45,7 @@ namespace TaskAPI_2_1
                ).AddLogging(lb => lb
                    .AddFluentMigratorConsole());
             services.AddControllers();
+            services.AddHttpClient();
             services.AddSingleton<IConectionOpen, ConectionOpen>();
              services.AddSingleton<IAgentCpuMetric, AgentCpuMetric>();
             services.AddSwaggerGen(c =>
