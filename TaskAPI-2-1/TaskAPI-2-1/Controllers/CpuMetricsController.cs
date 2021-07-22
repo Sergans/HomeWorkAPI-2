@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using TaskAPI_2_1.DAL.Repository;
+using System.Net.Http;
 
 namespace TaskAPI_2_1.Controllers
 {
@@ -32,7 +33,13 @@ namespace TaskAPI_2_1.Controllers
         public IActionResult GetMetricsFromAllCluster([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
-            var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
+            //var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
+            var request = new HttpRequestMessage(HttpMethod.Get,
+           "http://localhost:50343/api/cpumetrics/from/1/to/999999?var=val&var1=val1");
+            request.Headers.Add("Accept", "application/vnd.github.v3+json");
+            var client = clientFactory.CreateClient();
+            HttpResponseMessage response = client.SendAsync(request).Result;
+
             return Ok(metrics);
         }
        
