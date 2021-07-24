@@ -30,6 +30,7 @@ namespace TaskAPI_2_1.Client
         {
             var fromParameter = request.FromTime.ToUnixTimeSeconds();
             var toParameter = request.ToTime.ToUnixTimeSeconds();
+            
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress}/api/metrics/cpu/from/{fromParameter}/to/{toParameter}");
             try
             {

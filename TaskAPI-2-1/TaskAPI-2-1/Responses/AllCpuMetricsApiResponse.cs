@@ -7,6 +7,6 @@ namespace TaskAPI_2_1.Responses
 {
     public class AllCpuMetricsApiResponse
     {
-        DateTimeOffset 
+       public AllCpuMetricsApiResponse response { get; set; }
     }
 }
