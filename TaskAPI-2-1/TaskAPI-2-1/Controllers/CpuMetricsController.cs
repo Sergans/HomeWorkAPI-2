@@ -41,7 +41,7 @@ namespace TaskAPI_2_1.Controllers
            var a = new MetricsAgentClient(b,_logger);
             _logger.LogInformation($"{fromTime},{toTime}");
             //var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
-           var metrics =a.GetAllCpuMetrics(new GetAllCpuMetricsApiRequest {ClientBaseAddress = "http://localhost:5000/api/metrics/cpu/from/2021-07-24Z17:08:30/to/2021-07-24Z17:08:40" });
+           var metrics =a.GetAllCpuMetrics(new GetAllCpuMetricsApiRequest {ClientBaseAddress = "http://localhost:5000/api/metrics/cpu/from/2021-07-25Z16:50:30/to/2021-07-26Z19:30:40" });
             
             return Ok(metrics);
         }
