@@ -58,7 +58,7 @@ namespace MetricsAgent.DAL
         public IList<CpuMetric> GetByTimePeriod(DateTimeOffset fromTime, DateTimeOffset toTime)
         {
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
-            return connection.Query<CpuMetric>("SELECT id,value,time FROM cpumetrics WHERE time>@fromTime AND time<@toTime", new
+            return connection.Query<CpuMetric>("SELECT id,value,time FROM cpumetrics WHERE time BETWEEN @fromTime AND @toTime", new
             {
                 fromTime = fromTime.ToUnixTimeSeconds(),
                 toTime = toTime.ToUnixTimeSeconds()

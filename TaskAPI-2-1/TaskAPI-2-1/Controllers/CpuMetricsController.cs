@@ -18,11 +18,11 @@ namespace TaskAPI_2_1.Controllers
     {
         private readonly ILogger<CpuMetricsController> _logger;
         private readonly IAgentCpuMetric repository;
-        private readonly IMetricsAgentClient client;
-        public CpuMetricsController(ILogger<CpuMetricsController> logger, IAgentCpuMetric repository,IMetricsAgentClient client)
+       // private readonly IMetricsAgentClient _client;
+        public CpuMetricsController(ILogger<CpuMetricsController> logger, IAgentCpuMetric repository)
         {
             this.repository = repository;
-            this.client = client;
+           // _client = client;
             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
         }
@@ -36,9 +36,13 @@ namespace TaskAPI_2_1.Controllers
         [HttpGet("cluster/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAllCluster([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
+
+           var b = new HttpClient();
+           var a = new MetricsAgentClient(b,_logger);
             _logger.LogInformation($"{fromTime},{toTime}");
             //var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
-            var metrics = client.GetAllCpuMetrics(new GetAllCpuMetricsApiRequest { FromTime = fromTime, ToTime = toTime, ClientBaseAddress = "http://localhost:5000" });
+           var metrics =a.GetAllCpuMetrics(new GetAllCpuMetricsApiRequest {ClientBaseAddress = "http://localhost:5000/api/metrics/cpu/from/2021-07-24Z17:08:30/to/2021-07-24Z17:08:40" });
+            
             return Ok(metrics);
         }
        

@@ -15,6 +15,12 @@ using System.Data.SQLite;
 using FluentMigrator.Runner;
 using TaskAPI_2_1.DAL.Repository;
 using TaskAPI_2_1.IConectionManager;
+using TaskAPI_2_1.Client;
+using TaskAPI_2_1.Request;
+using TaskAPI_2_1.Responses;
+using TaskAPI_2_1.Agents.Model;
+using Polly;
+
 
 
 
@@ -45,9 +51,14 @@ namespace TaskAPI_2_1
                ).AddLogging(lb => lb
                    .AddFluentMigratorConsole());
             services.AddControllers();
-            services.AddHttpClient();
+
+            services.AddHttpClient<IMetricsAgentClient, MetricsAgentClient>().AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(1000))); ;
+            services.AddSingleton<CpuAgent>();
             services.AddSingleton<IConectionOpen, ConectionOpen>();
-             services.AddSingleton<IAgentCpuMetric, AgentCpuMetric>();
+            services.AddSingleton<IAgentCpuMetric, AgentCpuMetric>();
+           
+            services.AddSingleton<GetAllCpuMetricsApiRequest>();
+            services.AddSingleton<AllCpuMetricsApiResponse>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskAPI_2_1", Version = "v1" });
