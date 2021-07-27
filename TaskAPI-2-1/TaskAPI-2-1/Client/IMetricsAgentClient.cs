@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 using TaskAPI_2_1.Agents.Model;
+using System.IO;
 
 namespace TaskAPI_2_1.Client
 {
@@ -41,8 +42,9 @@ namespace TaskAPI_2_1.Client
             {
                 HttpResponseMessage response = _httpClient.SendAsync(httpRequest).Result;
                 var str = response.StatusCode;
-                using var responseStream = response.Content.ReadAsStreamAsync().Result;
                 
+                using var responseStream = response.Content.ReadAsStreamAsync().Result;
+                //StreamReader streamReader = new StreamReader(responseStream);
                 var stream= JsonSerializer.DeserializeAsync<AllCpuMetricsApiResponse>(responseStream).Result;
                 
                 return stream;

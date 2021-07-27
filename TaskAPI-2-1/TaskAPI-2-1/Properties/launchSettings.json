@@ -12,12 +12,12 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/",
+      "launchUrl": "api/metrics/cpu/cluster/from/2021-07-25Z16:50:30/to/2021-07-26Z19:30:40",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    
-    
+
+
     }
    }
   }
