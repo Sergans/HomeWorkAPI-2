@@ -40,6 +40,7 @@ namespace MetricsAgent
             Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
+                webBuilder.UseUrls("http://localhost:5010");
             })
             .ConfigureLogging(logging =>
             {
