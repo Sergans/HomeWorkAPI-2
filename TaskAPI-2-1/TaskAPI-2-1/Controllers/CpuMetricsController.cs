@@ -48,7 +48,7 @@ namespace TaskAPI_2_1.Controllers
 
             _logger.LogInformation($"{fromTime},{toTime}");
             //var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
-            var metrics =a.GetAllCpuMetrics(new GetAllCpuMetricsApiRequest {ClientBaseAddress="" });
+            var metrics =a.GetAllCpuMetrics(new GetAllCpuMetricsApiRequest { ClientBaseAddress = "http://localhost:5010/api/metrics/cpu/from", FromTime = fromTime, ToTime = toTime });
             
             return Ok(metrics);
         }
