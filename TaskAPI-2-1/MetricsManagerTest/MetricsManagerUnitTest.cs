@@ -35,7 +35,7 @@ namespace MetricsManagerTest
         {
             var fromTime = DateTimeOffset.FromUnixTimeSeconds(0);
             var toTime = DateTimeOffset.FromUnixTimeSeconds(100);
-            var result = controller.GetMetricsFromAllCluster(fromTime, toTime);
+            var result = controller.GetMetricsFromAllClusterAsync(fromTime, toTime);
             _ = Assert.IsAssignableFrom<IActionResult>(result);
         }
       }

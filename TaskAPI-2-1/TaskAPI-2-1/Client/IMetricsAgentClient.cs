@@ -36,16 +36,18 @@ namespace TaskAPI_2_1.Client
             //var toParameter = request.ToTime.ToString();
 
             //var httpRequest = new HttpRequestMessage(HttpMethod.Get,$"{request.ClientBaseAddress}/{fromParameter}/to/{toParameter}");
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress}");
-            httpRequest.Headers.Add("Accept", "application/json;charset=utf-8");
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress= "http://localhost:5010/api/metrics/cpu/from/2021-07-30Z14:00:30/to/2021-07-30Z14:00:45"}");
+            httpRequest.Headers.Add("Accept", "application/json");
             try
             {
                 HttpResponseMessage response = _httpClient.SendAsync(httpRequest).Result;
-                var str = response.StatusCode;
-                
+               
                 using var responseStream = response.Content.ReadAsStreamAsync().Result;
-                //StreamReader streamReader = new StreamReader(responseStream);
-                var stream= JsonSerializer.DeserializeAsync<AllCpuMetricsApiResponse>(responseStream).Result;
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var stream= JsonSerializer.DeserializeAsync<AllCpuMetricsApiResponse>(responseStream,options).Result;
                 
                 return stream;
             }
