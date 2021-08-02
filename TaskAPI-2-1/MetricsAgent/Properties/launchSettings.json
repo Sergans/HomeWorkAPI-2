@@ -14,9 +14,9 @@
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
-      "commandName": "Executable",
+      "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/metrics/cpu/from/2021-07-25Z16:50:30/to/2021-07-26Z19:30:40",
+      "launchUrl": "api/metrics/cpu/from/2021-08-02T19:44:31/to/2021-08-02T19:44:40",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

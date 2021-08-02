@@ -32,8 +32,8 @@ namespace TaskAPI_2_1.Client
         {
             //var fromParameter = request.FromTime.ToUnixTimeSeconds();
             //var toParameter = request.ToTime.ToUnixTimeSeconds();
-            var fromParameter = request.FromTime.UtcDateTime;
-            var toParameter = request.ToTime.UtcDateTime;
+            var fromParameter = request.FromTime;
+            var toParameter = request.ToTime;
 
            var httpRequest = new HttpRequestMessage(HttpMethod.Get,$"{request.ClientBaseAddress}/{fromParameter}/to/{toParameter}");
            // var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress= "http://localhost:5010/api/metrics/cpu/from/2021-07-30Z14:00:30/to/2021-07-30Z14:00:45"}");
