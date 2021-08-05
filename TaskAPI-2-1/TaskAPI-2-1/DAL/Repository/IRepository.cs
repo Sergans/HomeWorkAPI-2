@@ -15,7 +15,8 @@ namespace TaskAPI_2_1.DAL.Repository
    {
       IList<T> GetAgentMetricPeriod(int agentId, DateTimeOffset fromTime, DateTimeOffset toTime);
       IList<T> GetAllMetricPeriod(DateTimeOffset fromTime, DateTimeOffset toTime);
-    }
+      DateTimeOffset GetMaxDateTime();
+   }
     public interface IAgentCpuMetric : IRepository<CpuAgent>
     {
         
@@ -46,6 +47,13 @@ namespace TaskAPI_2_1.DAL.Repository
                 toTime = toTime.ToUnixTimeSeconds(),
                 
             }).ToList();
+        }
+        public DateTimeOffset GetMaxDateTime()
+        {   
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+            //var MaxDate =connection.Query<DateTimeOffset>("SELECT MAX(time) as max FROM cpuagentmetrics").Max();
+            
+            return connection.Query<DateTimeOffset>("SELECT time FROM cpuagentmetrics").Max();
         }
     }
 }

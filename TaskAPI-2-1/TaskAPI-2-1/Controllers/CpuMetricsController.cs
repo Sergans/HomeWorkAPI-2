@@ -52,6 +52,12 @@ namespace TaskAPI_2_1.Controllers
             
             return Ok();
         }
+        [HttpGet("get")]
+        public IActionResult Get()
+        {
+            var get = repository.GetMaxDateTime();
+            return Ok(get);
+        }
 
         
     }
