@@ -16,6 +16,7 @@ using TaskAPI_2_1.Responses;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
+using TaskAPI_2_1.Agents.Model;
 
 namespace TaskAPI_2_1.Controllers
 {
@@ -57,6 +58,13 @@ namespace TaskAPI_2_1.Controllers
         {
             var get = repository.GetMaxDateTime();
             return Ok(get);
+        }
+        [HttpPost("post")]
+        public IActionResult Post([FromBody]CpuAgent body)
+        {
+
+            repository.Create(body);
+            return Ok();
         }
 
         

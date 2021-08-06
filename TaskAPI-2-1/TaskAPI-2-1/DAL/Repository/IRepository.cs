@@ -6,6 +6,7 @@ using TaskAPI_2_1.Agents.Model;
 using Dapper;
 using System.Data.SQLite;
 using TaskAPI_2_1.IConectionManager;
+using TaskAPI_2_1.Responses;
 
 
 
@@ -16,6 +17,7 @@ namespace TaskAPI_2_1.DAL.Repository
       IList<T> GetAgentMetricPeriod(int agentId, DateTimeOffset fromTime, DateTimeOffset toTime);
       IList<T> GetAllMetricPeriod(DateTimeOffset fromTime, DateTimeOffset toTime);
       DateTimeOffset GetMaxDateTime();
+        void Create(T item);
    }
     public interface IAgentCpuMetric : IRepository<CpuAgent>
     {
@@ -54,6 +56,17 @@ namespace TaskAPI_2_1.DAL.Repository
             //var MaxDate =connection.Query<DateTimeOffset>("SELECT MAX(time) as max FROM cpuagentmetrics").Max();
             
             return connection.Query<DateTimeOffset>("SELECT time FROM cpuagentmetrics").Max();
+        }
+        public void Create(CpuAgent item)
+        {
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+            connection.Execute("INSERT INTO cpuagentmetrics(agentId,value,time) VALUES(@agentId,@value, @time)",
+                new
+                {
+                    value = item.Value,
+                    time = item.Time.ToUnixTimeSeconds(),
+                    agentId = item.AgentId
+                });
         }
     }
 }
