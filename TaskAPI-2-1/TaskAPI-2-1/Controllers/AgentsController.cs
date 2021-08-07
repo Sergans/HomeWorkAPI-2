@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskAPI_2_1.IConectionManager;
+using System.Data.SQLite;
+using Dapper;
 
 namespace TaskAPI_2_1.Controllers
 {
@@ -15,6 +18,15 @@ namespace TaskAPI_2_1.Controllers
         [HttpPost("register")]
         public IActionResult RegisterAgent([FromBody] AgentInfo agentInfo)
         {
+           
+            IConectionOpen connectionstring = new ConectionOpen();
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+            connection.Execute("INSERT INTO agents(agentId,AgentUrl) VALUES(@agentId,@AgentUrl)",
+                new
+                {
+                    AgentUrl = agentInfo.AgentAddress.ToString(),
+                    agentId = agentInfo.AgentId
+                });
             return Ok();
         }
 

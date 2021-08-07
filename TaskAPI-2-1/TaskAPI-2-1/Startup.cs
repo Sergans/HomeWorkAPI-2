@@ -54,6 +54,7 @@ namespace TaskAPI_2_1
 
             services.AddHttpClient<IMetricsAgentClient, MetricsAgentClient>().AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(1000))); ;
             services.AddSingleton<CpuAgent>();
+            services.AddSingleton<AgentInfo>();
             services.AddSingleton<IConectionOpen, ConectionOpen>();
             services.AddSingleton<IAgentCpuMetric, AgentCpuMetric>();
            
