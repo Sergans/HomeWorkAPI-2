@@ -18,7 +18,6 @@ namespace TaskAPI_2_1.Controllers
         [HttpPost("register")]
         public IActionResult RegisterAgent([FromBody] AgentInfo agentInfo)
         {
-           
             IConectionOpen connectionstring = new ConectionOpen();
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
             connection.Execute("INSERT INTO agents(agentId,AgentUrl) VALUES(@agentId,@AgentUrl)",

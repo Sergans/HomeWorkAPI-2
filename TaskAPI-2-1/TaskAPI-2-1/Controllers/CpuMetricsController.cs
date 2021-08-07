@@ -59,7 +59,7 @@ namespace TaskAPI_2_1.Controllers
             var request = new GetAllCpuMetricsApiRequest();
             request.FromTime = repository.GetMaxDateTime();
             request.ToTime = DateTimeOffset.Now;
-            request.ClientBaseAddress = "http://localhost:5010/api/metrics/cpu/from";
+            request.ClientBaseAddress = repository.GetAgentAdress();
             var client = new HttpClient();
             var cl = new MetricsAgentClient(client,_logger);
             var metrics=cl.GetAllCpuMetrics(request);
@@ -72,10 +72,10 @@ namespace TaskAPI_2_1.Controllers
             return Ok();
         }
         [HttpPost("post")]
-        public IActionResult Post([FromBody]CpuAgent body)
+        public IActionResult Post([FromBody]AgentInfo body)
         {
 
-            repository.Create(body);
+            
             return Ok();
         }
 

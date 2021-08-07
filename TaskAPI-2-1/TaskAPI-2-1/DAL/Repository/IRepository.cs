@@ -7,6 +7,8 @@ using Dapper;
 using System.Data.SQLite;
 using TaskAPI_2_1.IConectionManager;
 using TaskAPI_2_1.Responses;
+using TaskAPI_2_1;
+
 
 
 
@@ -17,7 +19,8 @@ namespace TaskAPI_2_1.DAL.Repository
       IList<T> GetAgentMetricPeriod(int agentId, DateTimeOffset fromTime, DateTimeOffset toTime);
       IList<T> GetAllMetricPeriod(DateTimeOffset fromTime, DateTimeOffset toTime);
       DateTimeOffset GetMaxDateTime();
-        void Create(T item);
+      void Create(T item);
+      string GetAgentAdress();
    }
     public interface IAgentCpuMetric : IRepository<CpuAgent>
     {
@@ -67,6 +70,11 @@ namespace TaskAPI_2_1.DAL.Repository
                     time = item.Time.ToUnixTimeSeconds(),
                     agentId = item.AgentId
                 });
+        }
+        public string GetAgentAdress()
+        {
+            using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
+            return connection.Query<string>("SELECT AgentUrl FROM agents").Single();
         }
     }
 }
