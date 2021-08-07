@@ -44,11 +44,7 @@ namespace TaskAPI_2_1.Controllers
         [HttpGet("cluster/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAllClusterAsync([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
-           var client = new HttpClient();
-           var a =new MetricsAgentClient(client,_logger);
-
-            _logger.LogInformation($"{fromTime},{toTime}");
-            
+           _logger.LogInformation($"{fromTime},{toTime}");
             return Ok();
         }
         [HttpGet("get")]
@@ -70,11 +66,9 @@ namespace TaskAPI_2_1.Controllers
                     foreach (var metric in metrics.Metrics)
                     {
                         repository.Create(metric, agent.AgentId);
-
                     }
                 }
-                
-
+               
             }
             
             return Ok();
