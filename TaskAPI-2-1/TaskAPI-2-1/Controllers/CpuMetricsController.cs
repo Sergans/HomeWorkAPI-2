@@ -26,7 +26,7 @@ namespace TaskAPI_2_1.Controllers
     {
         private readonly ILogger<CpuMetricsController> _logger;
         private readonly IAgentCpuMetric repository;
-       // private readonly IMetricsAgentClient _client;
+       
         public CpuMetricsController(ILogger<CpuMetricsController> logger, IAgentCpuMetric repository)
         {
             this.repository = repository;
@@ -48,8 +48,6 @@ namespace TaskAPI_2_1.Controllers
            var a =new MetricsAgentClient(client,_logger);
 
             _logger.LogInformation($"{fromTime},{toTime}");
-            //var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
-           // var metrics =a.GetAllCpuMetrics(new GetAllCpuMetricsApiRequest { ClientBaseAddress = "http://localhost:5010/api/metrics/cpu/from", FromTime = fromTime, ToTime = toTime });
             
             return Ok();
         }

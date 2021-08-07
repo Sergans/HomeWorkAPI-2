@@ -56,8 +56,7 @@ namespace TaskAPI_2_1.DAL.Repository
         public DateTimeOffset GetMaxDateTime(int id)
         {   
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
-            //var MaxDate =connection.Query<DateTimeOffset>("SELECT MAX(time) as max FROM cpuagentmetrics").Max();
-            
+           
             return connection.Query<DateTimeOffset>("SELECT time FROM cpuagentmetrics WHERE agentId=@id",new { id = id }).Max();
 
         }
