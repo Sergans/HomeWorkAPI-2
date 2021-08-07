@@ -67,26 +67,18 @@ namespace TaskAPI_2_1.Controllers
                 var client = new HttpClient();
                 var response = new MetricsAgentClient(client, _logger);
                 var metrics = response.GetAllCpuMetrics(request);
-                foreach (var metric in metrics.Metrics)
+                if (metrics != null)
                 {
-                    repository.Create(metric,agent.AgentId);
+                    foreach (var metric in metrics.Metrics)
+                    {
+                        repository.Create(metric, agent.AgentId);
 
+                    }
                 }
+                
 
             }
-            //var request = new GetAllCpuMetricsApiRequest();
-            //request.FromTime = repository.GetMaxDateTime();
-           // request.ToTime = DateTimeOffset.Now;
-            //request.ClientBaseAddress = repository.GetAgentAdress();
-           // var client = new HttpClient();
-            //var cl = new MetricsAgentClient(client,_logger);
-            //var metrics=cl.GetAllCpuMetrics(request);
-            //foreach(var metric in metrics.Metrics)
-            //{
-            //    repository.Create(metric);
-
-            //}
-            //var get = repository.GetMaxDateTime();
+            
             return Ok();
         }
         [HttpPost("post")]
