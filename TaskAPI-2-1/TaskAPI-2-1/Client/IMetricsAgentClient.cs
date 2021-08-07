@@ -30,13 +30,13 @@ namespace TaskAPI_2_1.Client
 
         public AllCpuMetricsApiResponse GetAllCpuMetrics(GetAllCpuMetricsApiRequest request)
         {
-            //var fromParameter = request.FromTime.ToUnixTimeSeconds();
-            //var toParameter = request.ToTime.ToUnixTimeSeconds();
-            //var fromParameter = request.FromTime.UtcDateTime;
+            var fromParameter = request.FromTime.ToUniversalTime();
+            var toParameter = request.ToTime.AddDays(1);
+           // var fromParameter = request.FromTime.UtcDateTime;
             //var toParameter = request.ToTime.UtcDateTime;
 
-           //var httpRequest = new HttpRequestMessage(HttpMethod.Get,$"{request.ClientBaseAddress}/{fromParameter}/to/{toParameter}");
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress= "http://localhost:5010/api/metrics/cpu/from/2021-07-30Z14:00:30/to/2021-07-30Z14:00:45"}");
+           var httpRequest = new HttpRequestMessage(HttpMethod.Get,$"{request.ClientBaseAddress}/{fromParameter}/to/{toParameter}");
+           // var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress= "http://localhost:5010/api/metrics/cpu/from/2021-07-30Z14:00:30/to/2021-07-30Z14:00:45"}");
             httpRequest.Headers.Add("Accept", "application/json");
             try
             {
