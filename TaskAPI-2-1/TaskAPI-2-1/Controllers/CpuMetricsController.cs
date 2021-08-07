@@ -56,18 +56,36 @@ namespace TaskAPI_2_1.Controllers
         [HttpGet("get")]
         public IActionResult Get()
         {
-            var request = new GetAllCpuMetricsApiRequest();
-            request.FromTime = repository.GetMaxDateTime();
-            request.ToTime = DateTimeOffset.Now;
-            request.ClientBaseAddress = repository.GetAgentAdress();
-            var client = new HttpClient();
-            var cl = new MetricsAgentClient(client,_logger);
-            var metrics=cl.GetAllCpuMetrics(request);
-            foreach(var metric in metrics.Metrics)
+            var agents = repository.GetAgentAdress();
+            foreach(var agent in agents)
             {
-                repository.Create(metric);
+                var request = new GetAllCpuMetricsApiRequest();
+                request.ToTime = DateTimeOffset.Now;
+                request.FromTime = repository.GetMaxDateTime(agent.AgentId);
+                request.ClientBaseAddress = agent.AgentUrl;
+                
+                var client = new HttpClient();
+                var cl = new MetricsAgentClient(client, _logger);
+                var metrics = cl.GetAllCpuMetrics(request);
+                foreach (var metric in metrics.Metrics)
+                {
+                    repository.Create(metric,agent.AgentId);
+
+                }
 
             }
+            //var request = new GetAllCpuMetricsApiRequest();
+            //request.FromTime = repository.GetMaxDateTime();
+           // request.ToTime = DateTimeOffset.Now;
+            //request.ClientBaseAddress = repository.GetAgentAdress();
+           // var client = new HttpClient();
+            //var cl = new MetricsAgentClient(client,_logger);
+            //var metrics=cl.GetAllCpuMetrics(request);
+            //foreach(var metric in metrics.Metrics)
+            //{
+            //    repository.Create(metric);
+
+            //}
             //var get = repository.GetMaxDateTime();
             return Ok();
         }

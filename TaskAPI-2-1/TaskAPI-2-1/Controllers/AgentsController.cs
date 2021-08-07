@@ -23,7 +23,7 @@ namespace TaskAPI_2_1.Controllers
             connection.Execute("INSERT INTO agents(agentId,AgentUrl) VALUES(@agentId,@AgentUrl)",
                 new
                 {
-                    AgentUrl = agentInfo.AgentAddress.ToString(),
+                    AgentUrl = agentInfo.AgentUrl.ToString(),
                     agentId = agentInfo.AgentId
                 });
             return Ok();

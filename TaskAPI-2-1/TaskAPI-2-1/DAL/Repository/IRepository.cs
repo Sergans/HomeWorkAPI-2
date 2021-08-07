@@ -18,9 +18,9 @@ namespace TaskAPI_2_1.DAL.Repository
    {
       IList<T> GetAgentMetricPeriod(int agentId, DateTimeOffset fromTime, DateTimeOffset toTime);
       IList<T> GetAllMetricPeriod(DateTimeOffset fromTime, DateTimeOffset toTime);
-      DateTimeOffset GetMaxDateTime();
-      void Create(T item);
-      string GetAgentAdress();
+      DateTimeOffset GetMaxDateTime(int id);
+      void Create(T item,int id);
+      List<AgentInfo> GetAgentAdress();
    }
     public interface IAgentCpuMetric : IRepository<CpuAgent>
     {
@@ -53,14 +53,15 @@ namespace TaskAPI_2_1.DAL.Repository
                 
             }).ToList();
         }
-        public DateTimeOffset GetMaxDateTime()
+        public DateTimeOffset GetMaxDateTime(int id)
         {   
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
             //var MaxDate =connection.Query<DateTimeOffset>("SELECT MAX(time) as max FROM cpuagentmetrics").Max();
             
-            return connection.Query<DateTimeOffset>("SELECT time FROM cpuagentmetrics").Max();
+            return connection.Query<DateTimeOffset>("SELECT time FROM cpuagentmetrics WHERE agentId=@id",new { id = id }).Max();
+
         }
-        public void Create(CpuAgent item)
+        public void Create(CpuAgent item,int id)
         {
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
             connection.Execute("INSERT INTO cpuagentmetrics(agentId,value,time) VALUES(@agentId,@value, @time)",
@@ -68,13 +69,13 @@ namespace TaskAPI_2_1.DAL.Repository
                 {
                     value = item.Value,
                     time = item.Time.ToUnixTimeSeconds(),
-                    agentId = item.AgentId
-                });
+                    agentId = id
+                }) ;
         }
-        public string GetAgentAdress()
+        public List<AgentInfo> GetAgentAdress()
         {
             using var connection = new SQLiteConnection(connectionstring.GetOpenedConection());
-            return connection.Query<string>("SELECT AgentUrl FROM agents").Single();
+            return connection.Query<AgentInfo>("SELECT * FROM agents").ToList();
         }
     }
 }
