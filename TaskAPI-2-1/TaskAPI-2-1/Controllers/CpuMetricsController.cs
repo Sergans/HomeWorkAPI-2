@@ -65,8 +65,8 @@ namespace TaskAPI_2_1.Controllers
                 request.ClientBaseAddress = agent.AgentUrl;
                 
                 var client = new HttpClient();
-                var cl = new MetricsAgentClient(client, _logger);
-                var metrics = cl.GetAllCpuMetrics(request);
+                var response = new MetricsAgentClient(client, _logger);
+                var metrics = response.GetAllCpuMetrics(request);
                 foreach (var metric in metrics.Metrics)
                 {
                     repository.Create(metric,agent.AgentId);
