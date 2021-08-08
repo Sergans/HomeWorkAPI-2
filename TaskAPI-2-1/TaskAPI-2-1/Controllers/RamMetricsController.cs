@@ -12,6 +12,7 @@ namespace TaskAPI_2_1.Controllers
     [ApiController]
     public class RamMetricsController : ControllerBase
     {
+        private readonly IAgentCpuMetric repository;
         private readonly ILogger<RamMetricsController> _logger;
         public RamMetricsController(ILogger<RamMetricsController> logger)
         {
@@ -23,12 +24,14 @@ namespace TaskAPI_2_1.Controllers
         public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{agentId},{fromTime},{toTime}");
+            var metrics = repository.GetAgentMetricPeriod(agentId, fromTime, toTime);
             return Ok();
         }
         [HttpGet("cluster/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAllCluster([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
+            var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
             return Ok();
         }
     }

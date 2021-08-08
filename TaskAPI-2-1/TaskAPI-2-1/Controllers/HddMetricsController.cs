@@ -13,7 +13,7 @@ namespace TaskAPI_2_1.Controllers
     public class HddMetricsController : ControllerBase
     {
         private readonly ILogger<HddMetricsController> _logger;
-
+        private readonly IAgentCpuMetric repository;
         public HddMetricsController(ILogger<HddMetricsController> logger)
         {
             _logger = logger;
@@ -23,13 +23,15 @@ namespace TaskAPI_2_1.Controllers
         public IActionResult GetMetricsFromAgent([FromRoute] int agentId, [FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{agentId},{fromTime},{toTime}");
-            return Ok();
+            var metrics = repository.GetAgentMetricPeriod(agentId, fromTime, toTime);
+            return Ok(metrics);
         }
         [HttpGet("cluster/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAllCluster([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
-            return Ok();
+            var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
+            return Ok(metrics);
         }
     }
 }

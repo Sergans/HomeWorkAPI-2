@@ -45,7 +45,8 @@ namespace TaskAPI_2_1.Controllers
         public IActionResult GetMetricsFromAllClusterAsync([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
            _logger.LogInformation($"{fromTime},{toTime}");
-            return Ok();
+            var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
+            return Ok(metrics);
         }
         [HttpGet("get")]
         public IActionResult Get()
