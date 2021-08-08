@@ -30,8 +30,7 @@ namespace TaskAPI_2_1.Controllers
         public CpuMetricsController(ILogger<CpuMetricsController> logger, IAgentCpuMetric repository)
         {
             this.repository = repository;
-           
-            _logger = logger;
+             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
         }
         [HttpGet("agent/{agentId}/from/{fromTime}/to/{toTime}")]

@@ -61,6 +61,10 @@ namespace TaskAPI_2_1
             services.AddSingleton<AgentInfo>();
             services.AddSingleton<IConectionOpen, ConectionOpen>();
             services.AddSingleton<IAgentCpuMetric, AgentCpuMetric>();
+            services.AddSingleton<IAgentDotNetMetric, AgentDotNetMetric>();
+            services.AddSingleton<IAgentNetWorkMetric, AgentNetWorkMetric>();
+            services.AddSingleton<IAgentHddMetric, AgentHddMetric>();
+            services.AddSingleton<IAgentRamMetric, AgentRamMetric>();
             services.AddSingleton<GetAllCpuMetricsApiRequest>();
             services.AddSingleton<AllCpuMetricsApiResponse>();
             // ДОбавляем сервисы

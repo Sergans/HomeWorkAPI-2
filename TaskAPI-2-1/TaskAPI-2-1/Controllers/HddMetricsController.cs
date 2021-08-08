@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using TaskAPI_2_1.DAL.Repository;
 
 namespace TaskAPI_2_1.Controllers
 {
@@ -14,8 +15,9 @@ namespace TaskAPI_2_1.Controllers
     {
         private readonly ILogger<HddMetricsController> _logger;
         private readonly IAgentHddMetric repository;
-        public HddMetricsController(ILogger<HddMetricsController> logger)
+        public HddMetricsController(ILogger<HddMetricsController> logger, IAgentHddMetric repository)
         {
+            this.repository = repository;
             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
         }

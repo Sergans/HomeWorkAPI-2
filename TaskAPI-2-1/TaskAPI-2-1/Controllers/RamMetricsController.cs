@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using TaskAPI_2_1.DAL.Repository;
 
 namespace TaskAPI_2_1.Controllers
 {
@@ -14,8 +15,9 @@ namespace TaskAPI_2_1.Controllers
     {
         private readonly IAgentRamMetric repository;
         private readonly ILogger<RamMetricsController> _logger;
-        public RamMetricsController(ILogger<RamMetricsController> logger)
+        public RamMetricsController(ILogger<RamMetricsController> logger, IAgentRamMetric repository)
         {
+            this.repository = repository;
             _logger = logger;
             _logger.LogDebug(1, "NLog встроен в CpuMetricsController");
         }
@@ -25,14 +27,14 @@ namespace TaskAPI_2_1.Controllers
         {
             _logger.LogInformation($"{agentId},{fromTime},{toTime}");
             var metrics = repository.GetAgentMetricPeriod(agentId, fromTime, toTime);
-            return Ok();
+            return Ok(metrics);
         }
         [HttpGet("cluster/from/{fromTime}/to/{toTime}")]
         public IActionResult GetMetricsFromAllCluster([FromRoute] DateTimeOffset fromTime, [FromRoute] DateTimeOffset toTime)
         {
             _logger.LogInformation($"{fromTime},{toTime}");
             var metrics = repository.GetAllMetricPeriod(fromTime, toTime);
-            return Ok();
+            return Ok(metrics);
         }
     }
 }
