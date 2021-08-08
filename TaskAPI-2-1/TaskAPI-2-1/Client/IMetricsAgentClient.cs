@@ -17,6 +17,11 @@ namespace TaskAPI_2_1.Client
    public interface IMetricsAgentClient
     {
         AllCpuMetricsApiResponse GetAllCpuMetrics(GetAllCpuMetricsApiRequest request);
+        AllRamMetricsApiResponse GetAllRamMetrics(GetAllRamMetricsApiRequest request);
+        AllHddMetricsApiResponse GetAllHddMetrics(GetAllHddMetricsApiRequest request);
+        AllDonNetMetricsApiResponse GetDonNetMetrics(DonNetMetrisApiRequest request);
+        AllNetWorkMetricsApiResponse GetDonNetMetrics(NetWorkMetrisApiRequest request);
+
     }
     public class MetricsAgentClient : IMetricsAgentClient
     {
@@ -55,6 +60,26 @@ namespace TaskAPI_2_1.Client
             }
             return null;
 
+        }
+
+        public AllHddMetricsApiResponse GetAllHddMetrics(GetAllHddMetricsApiRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AllRamMetricsApiResponse GetAllRamMetrics(GetAllRamMetricsApiRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AllDonNetMetricsApiResponse GetDonNetMetrics(DonNetMetrisApiRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AllNetWorkMetricsApiResponse GetDonNetMetrics(NetWorkMetrisApiRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
