@@ -21,11 +21,11 @@ namespace TaskAPI_2_1.Client
     public class MetricsAgentClient : IMetricsAgentClient
     {
         private readonly HttpClient _httpClient;
-        private readonly ILogger _logger;
-        public MetricsAgentClient(HttpClient httpClient, ILogger logger)
+        //private readonly ILogger _logger;
+        public MetricsAgentClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _logger = logger;
+           // _logger = logger;
         }
 
         public AllCpuMetricsApiResponse GetAllCpuMetrics(GetAllCpuMetricsApiRequest request)
@@ -51,7 +51,7 @@ namespace TaskAPI_2_1.Client
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+               // _logger.LogError(ex.Message);
             }
             return null;
 

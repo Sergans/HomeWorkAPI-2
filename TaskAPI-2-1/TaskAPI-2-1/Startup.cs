@@ -69,7 +69,7 @@ namespace TaskAPI_2_1
             services.AddSingleton<CpuManagerJob>();
             services.AddSingleton(new JobSchedule(
             jobType: typeof(CpuManagerJob),
-            cronExpression: "0/5 * * * * ?"));
+            cronExpression: "0/30 * * * * ?"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskAPI_2_1", Version = "v1" });

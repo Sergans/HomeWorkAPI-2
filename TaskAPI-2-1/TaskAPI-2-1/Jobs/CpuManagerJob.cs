@@ -18,10 +18,10 @@ namespace TaskAPI_2_1.Jobs
     public class CpuManagerJob : IJob
     {
         private IAgentCpuMetric _repository;
-        private readonly ILogger _logger;
-        public CpuManagerJob(IAgentCpuMetric repository, ILogger logger)
+       // private readonly ILogger _logger;
+        public CpuManagerJob(IAgentCpuMetric repository)
         {
-            _logger = logger;
+           // _logger = logger;
             _repository = repository;
         }
         public Task Execute(IJobExecutionContext context)
@@ -35,7 +35,7 @@ namespace TaskAPI_2_1.Jobs
                 request.ClientBaseAddress = agent.AgentUrl;
 
                 var client = new HttpClient();
-                var response = new MetricsAgentClient(client, _logger);
+                var response = new MetricsAgentClient(client);
                 var metrics = response.GetAllCpuMetrics(request);
                 if (metrics != null)
                 {

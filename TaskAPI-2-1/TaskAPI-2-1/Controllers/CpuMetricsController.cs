@@ -59,7 +59,7 @@ namespace TaskAPI_2_1.Controllers
                 request.ClientBaseAddress = agent.AgentUrl;
                 
                 var client = new HttpClient();
-                var response = new MetricsAgentClient(client, _logger);
+                var response = new MetricsAgentClient(client);
                 var metrics = response.GetAllCpuMetrics(request);
                 if (metrics != null)
                 {
