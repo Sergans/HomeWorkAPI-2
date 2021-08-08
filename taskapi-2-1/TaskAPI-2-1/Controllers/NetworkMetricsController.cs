@@ -12,7 +12,7 @@ namespace TaskAPI_2_1.Controllers
     [ApiController]
     public class NetworkMetricsController : ControllerBase
     {
-        private readonly IAgentCpuMetric repository;
+        private readonly IAgentNetWorkMetric repository;
         private readonly ILogger<NetworkMetricsController> _logger;
         public NetworkMetricsController(ILogger<NetworkMetricsController> logger)
         {
