@@ -26,6 +26,22 @@ namespace TaskAPI_2_1.DAL.Repository
     {
         
     }
+    public interface IAgentDotNetMetric : IRepository<DotNetAgent>
+    {
+
+    }
+    public interface IAgentNetWorkMetric : IRepository<NetWorkAgent>
+    {
+
+    }
+    public interface IAgentHddMetric : IRepository<HddAgent>
+    {
+
+    }
+    public interface IAgentRamMetric : IRepository<RamAgent>
+    {
+
+    }
     public class AgentCpuMetric:IAgentCpuMetric
     {
         public AgentCpuMetric()
