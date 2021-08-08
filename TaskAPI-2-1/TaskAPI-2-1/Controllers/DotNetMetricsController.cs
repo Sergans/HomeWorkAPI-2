@@ -13,7 +13,7 @@ namespace TaskAPI_2_1.Controllers
     public class DotNetMetricsController : ControllerBase
     {
         private readonly ILogger<DotNetMetricsController> _logger;
-        private readonly IAgentCpuMetric repository;
+        private readonly IAgentDotNetMetric repository;
         public DotNetMetricsController(ILogger<DotNetMetricsController> logger)
         {
             _logger = logger;

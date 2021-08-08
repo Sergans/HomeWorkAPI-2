@@ -13,7 +13,7 @@ namespace TaskAPI_2_1.Controllers
     public class HddMetricsController : ControllerBase
     {
         private readonly ILogger<HddMetricsController> _logger;
-        private readonly IAgentCpuMetric repository;
+        private readonly IAgentHddMetric repository;
         public HddMetricsController(ILogger<HddMetricsController> logger)
         {
             _logger = logger;

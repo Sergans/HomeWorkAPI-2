@@ -12,7 +12,7 @@ namespace TaskAPI_2_1.Controllers
     [ApiController]
     public class RamMetricsController : ControllerBase
     {
-        private readonly IAgentCpuMetric repository;
+        private readonly IAgentRamMetric repository;
         private readonly ILogger<RamMetricsController> _logger;
         public RamMetricsController(ILogger<RamMetricsController> logger)
         {
