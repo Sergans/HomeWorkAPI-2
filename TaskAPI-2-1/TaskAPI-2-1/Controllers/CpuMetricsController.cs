@@ -73,14 +73,6 @@ namespace TaskAPI_2_1.Controllers
             
             return Ok();
         }
-        [HttpPost("post")]
-        public IActionResult Post([FromBody]AgentInfo body)
-        {
-
-            
-            return Ok();
-        }
-
         
     }
 }
