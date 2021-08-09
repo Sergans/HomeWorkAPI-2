@@ -18,7 +18,7 @@ namespace TaskAPI_2_1.Jobs
         // private readonly ILogger _logger;
         public HddManagerJob(IAgentHddMetric repository)
         {
-            // _logger = logger;
+           //  _logger = logger;
             _repository = repository;
         }
         public Task Execute(IJobExecutionContext context)
