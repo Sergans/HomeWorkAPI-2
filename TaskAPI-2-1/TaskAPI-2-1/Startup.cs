@@ -65,8 +65,8 @@ namespace TaskAPI_2_1
             services.AddSingleton<IAgentNetWorkMetric, AgentNetWorkMetric>();
             services.AddSingleton<IAgentHddMetric, AgentHddMetric>();
             services.AddSingleton<IAgentRamMetric, AgentRamMetric>();
-            services.AddSingleton<GetAllCpuMetricsApiRequest>();
-            services.AddSingleton<AllCpuMetricsApiResponse>();
+           // services.AddSingleton<GetAllCpuMetricsApiRequest>();
+           // services.AddSingleton<AllCpuMetricsApiResponse>();
             // ДОбавляем сервисы
             services.AddSingleton<IJobFactory, SingletonJobFactory>();
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
