@@ -26,14 +26,14 @@ namespace TaskAPI_2_1.Jobs
             var agents = _repository.GetAgentAdress();
             foreach (var agent in agents)
             {
-                var request = new GetAllCpuMetricsApiRequest();
+                var request = new GetAllHddMetricsApiRequest();
                 request.ToTime = DateTimeOffset.Now;
                 request.FromTime = _repository.GetMaxDateTime(agent.AgentId);
                 request.ClientBaseAddress = agent.AgentUrl;
 
                 var client = new HttpClient();
                 var response = new MetricsAgentClient(client);
-                var metrics = response.GetAllCpuMetrics(request);
+                var metrics = response.GetAllHddMetrics(request);
                 if (metrics != null)
                 {
                     foreach (var metric in metrics.Metrics)
