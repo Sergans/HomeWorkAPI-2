@@ -84,7 +84,8 @@ namespace TaskAPI_2_1.Jobs
         private readonly IJobFactory _jobFactory;
         private readonly IEnumerable<JobSchedule> _jobSchedules;
         public QuartzHostedService(
-        IAgentCpuMetric repository,
+        IAgentCpuMetric repository, IAgentDotNetMetric repositorydotnet, 
+        IAgentNetWorkMetric repositorynetwork, IAgentHddMetric repositoryhdd, IAgentRamMetric repositoryram,
         ISchedulerFactory schedulerFactory,
         IJobFactory jobFactory,
         IEnumerable<JobSchedule> jobSchedules)

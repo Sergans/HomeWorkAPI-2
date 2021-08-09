@@ -71,8 +71,24 @@ namespace TaskAPI_2_1
             services.AddSingleton<IJobFactory, SingletonJobFactory>();
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             services.AddSingleton<CpuManagerJob>();
+            services.AddSingleton<DotNetManagerJob>();
+            services.AddSingleton<NetWorkManagerJob>();
+            services.AddSingleton<HddManagerJob>();
+            services.AddSingleton<RamManagerJob>();
             services.AddSingleton(new JobSchedule(
             jobType: typeof(CpuManagerJob),
+            cronExpression: "0/30 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+            jobType: typeof(DotNetManagerJob),
+            cronExpression: "0/30 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+            jobType: typeof(NetWorkManagerJob),
+            cronExpression: "0/30 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+            jobType: typeof(HddManagerJob),
+            cronExpression: "0/30 * * * * ?"));
+            services.AddSingleton(new JobSchedule(
+            jobType: typeof(RamManagerJob),
             cronExpression: "0/30 * * * * ?"));
             services.AddSwaggerGen(c =>
             {

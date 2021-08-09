@@ -19,8 +19,8 @@ namespace TaskAPI_2_1.Client
         AllCpuMetricsApiResponse GetAllCpuMetrics(GetAllCpuMetricsApiRequest request);
         AllRamMetricsApiResponse GetAllRamMetrics(GetAllRamMetricsApiRequest request);
         AllHddMetricsApiResponse GetAllHddMetrics(GetAllHddMetricsApiRequest request);
-        AllDotNetMetricsApiResponse GetDonNetMetrics(GetAllDotNetMetricsApiRequest request);
-        AllNetWorkMetricsApiResponse GetNetWorkMetrics(GetAllNetWorkMetricsApiRequest request);
+        AllDotNetMetricsApiResponse GetAllDotNetMetrics(GetAllDotNetMetricsApiRequest request);
+        AllNetWorkMetricsApiResponse GetAllNetWorkMetrics(GetAllNetWorkMetricsApiRequest request);
 
     }
     public class MetricsAgentClient : IMetricsAgentClient
@@ -114,7 +114,7 @@ namespace TaskAPI_2_1.Client
             return null;
         }
 
-        public AllDotNetMetricsApiResponse GetDonNetMetrics(GetAllDotNetMetricsApiRequest request)
+        public AllDotNetMetricsApiResponse GetAllDotNetMetrics(GetAllDotNetMetricsApiRequest request)
         {
             var fromParameter = request.FromTime.ToUniversalTime();
             var toParameter = request.ToTime.AddDays(1);
@@ -140,7 +140,7 @@ namespace TaskAPI_2_1.Client
             return null;
         }
 
-        public AllNetWorkMetricsApiResponse GetNetWorkMetrics(GetAllNetWorkMetricsApiRequest request)
+        public AllNetWorkMetricsApiResponse GetAllNetWorkMetrics(GetAllNetWorkMetricsApiRequest request)
         {
             var fromParameter = request.FromTime.ToUniversalTime();
             var toParameter = request.ToTime.AddDays(1);
