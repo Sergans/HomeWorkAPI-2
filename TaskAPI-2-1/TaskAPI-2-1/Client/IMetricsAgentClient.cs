@@ -35,8 +35,8 @@ namespace TaskAPI_2_1.Client
 
         public AllCpuMetricsApiResponse GetAllCpuMetrics(GetAllCpuMetricsApiRequest request)
         {
-            var fromParameter = request.FromTime.ToUniversalTime();
-            var toParameter = request.ToTime.AddDays(1);
+            var fromParameter = request.FromTime.ToString("O");
+            var toParameter = request.ToTime.ToString("O");
            
            var httpRequest = new HttpRequestMessage(HttpMethod.Get,$"{request.ClientBaseAddress}/api/metrics/cpu/from/{fromParameter}/to/{toParameter}");
            
@@ -64,8 +64,8 @@ namespace TaskAPI_2_1.Client
 
         public AllHddMetricsApiResponse GetAllHddMetrics(GetAllHddMetricsApiRequest request)
         {
-            var fromParameter = request.FromTime.ToUniversalTime();
-            var toParameter = request.ToTime.AddDays(1);
+            var fromParameter = request.FromTime.ToString("O");
+            var toParameter = request.ToTime.ToString("O");
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress}/api/metrics/hdd/left/from/{fromParameter}/to/{toParameter}");
             httpRequest.Headers.Add("Accept", "application/json");
             try
@@ -90,8 +90,8 @@ namespace TaskAPI_2_1.Client
 
         public AllRamMetricsApiResponse GetAllRamMetrics(GetAllRamMetricsApiRequest request)
         {
-            var fromParameter = request.FromTime.ToUniversalTime();
-            var toParameter = request.ToTime.AddDays(1);
+            var fromParameter = request.FromTime.ToString("O");
+            var toParameter = request.ToTime.ToString("O");
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress}/api/metrics/ram/available/from/{fromParameter}/to/{toParameter}");
             httpRequest.Headers.Add("Accept", "application/json");
             try
@@ -116,8 +116,8 @@ namespace TaskAPI_2_1.Client
 
         public AllDotNetMetricsApiResponse GetAllDotNetMetrics(GetAllDotNetMetricsApiRequest request)
         {
-            var fromParameter = request.FromTime.ToUniversalTime();
-            var toParameter = request.ToTime.AddDays(1);
+            var fromParameter = request.FromTime.ToString("O");
+            var toParameter = request.ToTime.ToString("O");
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress}/api/metrics/dotnet/errors-count/from/{fromParameter}/to/{toParameter}");
             httpRequest.Headers.Add("Accept", "application/json");
             try
@@ -142,8 +142,8 @@ namespace TaskAPI_2_1.Client
 
         public AllNetWorkMetricsApiResponse GetAllNetWorkMetrics(GetAllNetWorkMetricsApiRequest request)
         {
-            var fromParameter = request.FromTime.ToUniversalTime();
-            var toParameter = request.ToTime.AddDays(1);
+            var fromParameter = request.FromTime.ToString("O");
+            var toParameter = request.ToTime.ToString("O");
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress}/api/metrics/network/from/{fromParameter}/to/{toParameter}");
             httpRequest.Headers.Add("Accept", "application/json");
             try
