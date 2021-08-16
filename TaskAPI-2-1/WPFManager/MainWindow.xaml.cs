@@ -36,9 +36,12 @@ namespace WPFManager
             var request = new WPFRequest();
             request.ToTime = ToTime.Text;
             request.FromTime = FromTime.Text;
-            request.ClientBaseAddress=
-            client.GetMetric(re)
-
+            request.ClientBaseAddress = Address.Text;
+            var a =client.GetMetric(request);
+            foreach(var data in a.Metrics)
+            {
+               Out.Text= data.Time.ToString();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

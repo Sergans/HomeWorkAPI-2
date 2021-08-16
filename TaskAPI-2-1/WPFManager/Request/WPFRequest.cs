@@ -8,8 +8,8 @@ namespace WPFManager.Request
 {
     class WPFRequest
     {
-        public DateTimeOffset FromTime { get; set; }
-        public DateTimeOffset ToTime { get; set; }
+        public string FromTime { get; set; }
+        public string ToTime { get; set; }
         public string ClientBaseAddress { get; set; }
     }
 }
