@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
+using WPFManager.Client;
+using WPFManager.Request;
+using WPFManager.Response;
 
 namespace WPFManager
 {
@@ -27,13 +31,20 @@ namespace WPFManager
        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var httpclient = new HttpClient();
+            var client = new WPFClient(httpclient);
+            var request = new WPFRequest();
+            request.ToTime = ToTime.Text;
+            request.FromTime = FromTime.Text;
+            request.ClientBaseAddress=
+            client.GetMetric(re)
 
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string a;
-            DateTimeOffset.Now;
+            ToTime.Text= DateTimeOffset.Now.ToString("d");
+            
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

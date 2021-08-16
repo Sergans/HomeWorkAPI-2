@@ -12,9 +12,10 @@
             <ColumnDefinition Width="29*"/>
         </Grid.ColumnDefinitions>
         <Button Content="Пуск" Grid.Column="1" HorizontalAlignment="Left" Margin="90,244,0,0" VerticalAlignment="Top" Width="150" Height="55" Click="Button_Click"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,49,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,79,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.25,0.837"/>
-        <Button Content="Получить время" HorizontalAlignment="Left" Margin="160,49,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="105" Click="Button_Click_1"/>
+        <TextBox x:Name="ToTime" Grid.Column="1" HorizontalAlignment="Left" Margin="95,49,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" TextChanged="TextBox_TextChanged" Height="20"/>
+        <TextBox x:Name="FromTime" Grid.Column="1" HorizontalAlignment="Left" Margin="95,79,0,0" Text="Начальная дата" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.25,0.837" Height="20"/>
+        <Button Content="Текущее время" HorizontalAlignment="Left" Margin="205,49,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="100" Click="Button_Click_1" Height="20"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="95,114,0,0" Text="Адрес запроса" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
 
     </Grid>
 </Window>
