@@ -24,5 +24,21 @@ namespace WPFManager
         {
             InitializeComponent();
         }
+       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string a;
+            DateTimeOffset.Now;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
     }
 }
