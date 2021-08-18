@@ -31,6 +31,7 @@ namespace WPFManager
        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Out.Text = "";
             var httpclient = new HttpClient();
             var client = new WPFClient(httpclient);
             var request = new WPFRequest();
@@ -38,14 +39,19 @@ namespace WPFManager
             request.FromTime = FromTime.Text;
             request.ClientBaseAddress = Address.Text;
             var a =client.GetMetric(request);
-            if (a != null)
+            try
             {
                 foreach (var data in a.Metrics)
                 {
-                    Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                        Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
                 }
+               
             }
-            else MessageBox.Show("NO METRICS");
+            catch
+            {
+              MessageBox.Show("No metrics,please run agent service");
+            }
+           
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

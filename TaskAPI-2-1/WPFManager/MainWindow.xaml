@@ -16,7 +16,7 @@
         <TextBox x:Name="FromTime" HorizontalAlignment="Left" Margin="125,19,0,0" Text="2021-08-16" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.25,0.837" Height="20" Grid.ColumnSpan="2"/>
         <Button Content="Текущее время" HorizontalAlignment="Left" Margin="15,19,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_1" Height="20"/>
         <TextBox x:Name="Address" HorizontalAlignment="Left" Margin="125,79,0,0" Text="http://localhost:5010" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="20" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="Out" Grid.Column="1" HorizontalAlignment="Left" Margin="45,19,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="390"/>
+        <TextBox x:Name="Out" Grid.Column="1" HorizontalAlignment="Left" Margin="45,19,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="260"/>
 
     </Grid>
 </Window>
