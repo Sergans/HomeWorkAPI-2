@@ -11,12 +11,28 @@
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="29*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Пуск" HorizontalAlignment="Left" Margin="15,114,0,0" VerticalAlignment="Top" Width="150" Height="55" Click="Button_Click"/>
-        <TextBox x:Name="ToTime" HorizontalAlignment="Left" Margin="125,49,0,0" Text="2021-08-17" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" TextChanged="TextBox_TextChanged" Height="20" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="FromTime" HorizontalAlignment="Left" Margin="125,19,0,0" Text="2021-08-16" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.25,0.837" Height="20" Grid.ColumnSpan="2"/>
-        <Button Content="Текущее время" HorizontalAlignment="Left" Margin="15,19,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_1" Height="20"/>
-        <TextBox x:Name="Address" HorizontalAlignment="Left" Margin="125,79,0,0" Text="http://localhost:5010" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="20" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="Out" Grid.Column="1" HorizontalAlignment="Left" Margin="45,19,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="260"/>
+        <Button Content="Пуск" HorizontalAlignment="Left" Margin="190,114,0,0" VerticalAlignment="Top" Width="150" Height="55" Click="Button_Click" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="ToTime" HorizontalAlignment="Left" Margin="210,49,0,0" Text="2021-08-17" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" TextChanged="TextBox_TextChanged" Height="20" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="FromTime" HorizontalAlignment="Left" Margin="210,19,0,0" Text="2021-08-16" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.25,0.837" Height="20" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="Address" HorizontalAlignment="Left" Margin="210,79,0,0" Text="http://localhost:5010" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="20" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="Out" Grid.Column="1" HorizontalAlignment="Left" Margin="245,14,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="260"/>
+        <RadioButton x:Name="CPU" Content="CPU" HorizontalAlignment="Left" Margin="130,24,0,0" VerticalAlignment="Top" Width="90" Checked="RadioButton_Checked" Grid.Column="1"/>
+        <RadioButton Content="RAM" HorizontalAlignment="Left" Margin="130,49,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
+        <RadioButton Content="HDD" HorizontalAlignment="Left" Margin="130,74,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
+        <RadioButton Content="DOTNET" HorizontalAlignment="Left" Margin="130,99,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
+        <RadioButton Content="NETWORK" HorizontalAlignment="Left" Margin="130,124,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
+        <Label Content="FromTime" HorizontalAlignment="Left" Margin="110,19,0,0" VerticalAlignment="Top" Width="95" Height="25"/>
+        <Label Content="ToTime" HorizontalAlignment="Left" Margin="110,44,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.526,0.618" Height="25"/>
+        <Label Content="URL" HorizontalAlignment="Left" Margin="110,71,0,0" VerticalAlignment="Top" Width="93" RenderTransformOrigin="0.5,0.5" Height="31">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.277"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
 
     </Grid>
 </Window>

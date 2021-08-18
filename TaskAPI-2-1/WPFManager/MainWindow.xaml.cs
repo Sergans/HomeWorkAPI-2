@@ -38,12 +38,13 @@ namespace WPFManager
             request.ToTime = ToTime.Text;
             request.FromTime = FromTime.Text;
             request.ClientBaseAddress = Address.Text;
+            
             var a =client.GetMetric(request);
             try
             {
                 foreach (var data in a.Metrics)
                 {
-                        Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                    Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
                 }
                
             }
@@ -56,13 +57,18 @@ namespace WPFManager
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ToTime.Text= DateTimeOffset.Now.ToString("d");
+           
             
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
