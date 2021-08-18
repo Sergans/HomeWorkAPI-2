@@ -38,10 +38,14 @@ namespace WPFManager
             request.FromTime = FromTime.Text;
             request.ClientBaseAddress = Address.Text;
             var a =client.GetMetric(request);
-            foreach(var data in a.Metrics)
+            if (a != null)
             {
-               Out.Text= data.Time.ToString();
+                foreach (var data in a.Metrics)
+                {
+                    Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                }
             }
+            else MessageBox.Show("NO METRICS");
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
