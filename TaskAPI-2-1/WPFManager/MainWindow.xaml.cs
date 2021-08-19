@@ -40,10 +40,10 @@ namespace WPFManager
             request.ClientBaseAddress = Address.Text;
             if (CPU.IsChecked == true)
             {
-                var a = client.GetMetric(request);
+                var cpuout = client.GetCpuMetric(request);
                 try
                 {
-                    foreach (var data in a.Metrics)
+                    foreach (var data in cpuout.Metrics)
                     {
                         Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
                     }

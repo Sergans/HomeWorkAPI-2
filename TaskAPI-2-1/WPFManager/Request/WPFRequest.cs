@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFManager.Request
 {
-    class WPFRequest
+   public class WPFRequest
     {
         public string FromTime { get; set; }
         public string ToTime { get; set; }

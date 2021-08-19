@@ -7,8 +7,8 @@ using WPFManager.MetricModel;
 
 namespace WPFManager.Response
 {
-    class WPFResponse
+   public class WPFResponse
     {
-        public List<WPFModel> Metrics { get; set; }
+       public List<WPFModel> Metrics { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFManager.MetricModel
 {
-    class WPFModel
+   public class WPFModel
     {
         public DateTimeOffset Time { get; set; }
         public int Value { get; set; }
