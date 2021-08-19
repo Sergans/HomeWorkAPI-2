@@ -54,8 +54,25 @@ namespace WPFManager
                     MessageBox.Show("No metrics,please run agent service");
                 }
             }
-            
-           
+            if (RAM.IsChecked == true)
+            {
+                var ramout = client.GetRamMetric(request);
+                try
+                {
+                    foreach (var data in ramout.Metrics)
+                    {
+                        Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                    }
+
+                }
+                catch
+                {
+                    MessageBox.Show("No metrics,please run agent service");
+                }
+            }
+
+
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

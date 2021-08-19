@@ -16,7 +16,7 @@ namespace WPFManager.Client
         public WPFResponse GetCpuMetric(WPFRequest request);
         // public WPFResponse GetDotNetMetric(WPFRequest request);
         //public WPFResponse GetNetWorkMetric(WPFRequest request);
-        // public WPFResponse GetRamMetric(WPFRequest request);
+        public WPFResponse GetRamMetric(WPFRequest request);
         // public WPFResponse GetHddMetric(WPFRequest request);
     }
     public class WPFClient : IClient
@@ -69,10 +69,33 @@ namespace WPFManager.Client
         //    throw new NotImplementedException();
         //}
 
-        //public WPFResponse GetRamMetric(WPFRequest request)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public WPFResponse GetRamMetric(WPFRequest request)
+        {
+            var fromParameter = request.FromTime;
+            var toParameter = request.ToTime;
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, $"{request.ClientBaseAddress}/api/metrics/ram/available/from/{fromParameter}/to/{toParameter}");
+
+            httpRequest.Headers.Add("Accept", "application/json");
+            try
+            {
+                HttpResponseMessage response = _httpClient.SendAsync(httpRequest).Result;
+
+                using var responseStream = response.Content.ReadAsStreamAsync().Result;
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var stream = JsonSerializer.DeserializeAsync<WPFResponse>(responseStream, options).Result;
+
+                return stream;
+            }
+            catch (Exception ex)
+            {
+                // _logger.LogError(ex.Message);
+            }
+            return null;
+        }
     }
 }
 
