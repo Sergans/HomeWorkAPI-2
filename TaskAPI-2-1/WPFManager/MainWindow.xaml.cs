@@ -38,20 +38,23 @@ namespace WPFManager
             request.ToTime = ToTime.Text;
             request.FromTime = FromTime.Text;
             request.ClientBaseAddress = Address.Text;
-            
-            var a =client.GetMetric(request);
-            try
+            if (CPU.IsChecked == true)
             {
-                foreach (var data in a.Metrics)
+                var a = client.GetMetric(request);
+                try
                 {
-                    Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                    foreach (var data in a.Metrics)
+                    {
+                        Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                    }
+
                 }
-               
+                catch
+                {
+                    MessageBox.Show("No metrics,please run agent service");
+                }
             }
-            catch
-            {
-              MessageBox.Show("No metrics,please run agent service");
-            }
+            
            
         }
 
