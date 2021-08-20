@@ -18,9 +18,9 @@
         <TextBox x:Name="Out" Grid.Column="1" HorizontalAlignment="Left" Margin="245,14,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="260"/>
         <RadioButton x:Name="CPU" Content="CPU" HorizontalAlignment="Left" Margin="130,24,0,0" VerticalAlignment="Top" Width="90" Checked="RadioButton_Checked" Grid.Column="1"/>
         <RadioButton x:Name="RAM" Content="RAM" HorizontalAlignment="Left" Margin="130,49,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
-        <RadioButton Content="HDD" HorizontalAlignment="Left" Margin="130,74,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
-        <RadioButton Content="DOTNET" HorizontalAlignment="Left" Margin="130,99,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
-        <RadioButton Content="NETWORK" HorizontalAlignment="Left" Margin="130,124,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
+        <RadioButton x:Name="HDD" Content="HDD" HorizontalAlignment="Left" Margin="130,74,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
+        <RadioButton x:Name="DOTNET" Content="DOTNET" HorizontalAlignment="Left" Margin="130,99,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
+        <RadioButton x:Name="NETWORK" Content="NETWORK" HorizontalAlignment="Left" Margin="130,124,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
         <Label Content="FromTime" HorizontalAlignment="Left" Margin="110,19,0,0" VerticalAlignment="Top" Width="95" Height="25"/>
         <Label Content="ToTime" HorizontalAlignment="Left" Margin="110,44,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.526,0.618" Height="25"/>
         <Label Content="URL" HorizontalAlignment="Left" Margin="110,71,0,0" VerticalAlignment="Top" Width="93" RenderTransformOrigin="0.5,0.5" Height="31">

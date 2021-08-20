@@ -70,8 +70,55 @@ namespace WPFManager
                     MessageBox.Show("No metrics,please run agent service");
                 }
             }
+            if (HDD.IsChecked == true)
+            {
+                var hddout = client.GetHddMetric(request);
+                try
+                {
+                    foreach (var data in hddout.Metrics)
+                    {
+                        Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                    }
 
+                }
+                catch
+                {
+                    MessageBox.Show("No metrics,please run agent service");
+                }
+            }
+            if (DOTNET.IsChecked == true)
+            {
+                var dotnetout = client.GetDotNetMetric(request);
+                try
+                {
+                    foreach (var data in dotnetout.Metrics)
+                    {
+                        Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                    }
 
+                }
+                catch
+                {
+                    MessageBox.Show("No metrics,please run agent service");
+                }
+            }
+            if (NETWORK.IsChecked == true)
+            {
+                var networkout = client.GetNetWorkMetric(request);
+                try
+                {
+                    foreach (var data in networkout.Metrics)
+                    {
+                        Out.Text = ($"{Out.Text}{"Значение"}-{data.Value} {"Дата"}-{data.Time.ToString("d")}\r\n");
+                    }
+
+                }
+                catch
+                {
+                    MessageBox.Show("No metrics,please run agent service");
+                }
+
+            }
 
         }
 
