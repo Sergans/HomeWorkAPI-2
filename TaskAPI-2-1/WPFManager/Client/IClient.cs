@@ -49,7 +49,7 @@ namespace WPFManager.Client
             }
             catch (Exception ex)
             {
-                // _logger.LogError(ex.Message);
+                
             }
             return null;
         }
@@ -77,7 +77,7 @@ namespace WPFManager.Client
             }
             catch (Exception ex)
             {
-                // _logger.LogError(ex.Message);
+                
             }
             return null;
         }
@@ -105,7 +105,7 @@ namespace WPFManager.Client
             }
             catch (Exception ex)
             {
-                // _logger.LogError(ex.Message);
+                
             }
             return null;
         }
@@ -133,7 +133,7 @@ namespace WPFManager.Client
             }
             catch (Exception ex)
             {
-                // _logger.LogError(ex.Message);
+               
             }
             return null;
         }
@@ -161,7 +161,7 @@ namespace WPFManager.Client
             }
             catch (Exception ex)
             {
-                // _logger.LogError(ex.Message);
+                
             }
             return null;
         }
