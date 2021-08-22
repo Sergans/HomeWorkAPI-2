@@ -4,6 +4,7 @@ using TaskAPI_2_1.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
+using TaskAPI_2_1.DAL.Repository;
 
 namespace MetricsManagerTest
 {
@@ -15,10 +16,12 @@ namespace MetricsManagerTest
       {
             private CpuMetricsController controller;
             private Mock<ILogger<CpuMetricsController>> mocklog;
+            private Mock<IAgentCpuMetric> mock;
         public CpuMetricsControllerUnitTests()
             {
+            mock = new Mock<IAgentCpuMetric>();
             mocklog = new Mock<ILogger<CpuMetricsController>>();
-            controller = new CpuMetricsController(mocklog.Object);
+            controller = new CpuMetricsController(mocklog.Object, mock.Object);
             }
             [Fact]
             public void GetMetricsFromAgent_ReturnsOk()
@@ -43,10 +46,12 @@ namespace MetricsManagerTest
     {
         private Mock<ILogger<RamMetricsController>> mocklog;
         private RamMetricsController controller;
+        private Mock<IAgentRamMetric> mock;
         public RamMetricsControllerUnitTests()
         {
+            mock = new Mock<IAgentRamMetric>();
             mocklog = new Mock<ILogger<RamMetricsController>>();
-            controller = new RamMetricsController(mocklog.Object);
+            controller = new RamMetricsController(mocklog.Object, mock.Object);
         }
         [Fact]
         public void GetMetricsFromAgent_ReturnsOk()
@@ -70,11 +75,13 @@ namespace MetricsManagerTest
         public class HddMetricsControllerUnitTest
     {
         private Mock<ILogger<HddMetricsController>> mocklog;
+        private Mock<IAgentHddMetric> mock;
         private HddMetricsController controller;
         public HddMetricsControllerUnitTest()
         {
+            mock = new Mock<IAgentHddMetric>();
             mocklog = new Mock<ILogger<HddMetricsController>>();
-            controller = new HddMetricsController(mocklog.Object);
+            controller = new HddMetricsController(mocklog.Object, mock.Object);
         }
         [Fact]
         public void GetMetricsFromAgent_ReturnsOk()
@@ -98,11 +105,13 @@ namespace MetricsManagerTest
         public class NetworkMetricsControllerUnitTest
     {
         private Mock<ILogger<NetworkMetricsController>> mocklog;
+        private Mock<IAgentNetWorkMetric> mock;
         private NetworkMetricsController controller;
         public NetworkMetricsControllerUnitTest()
         {
+            mock = new Mock<IAgentNetWorkMetric>();
             mocklog = new Mock<ILogger<NetworkMetricsController>>();
-            controller = new NetworkMetricsController(mocklog.Object);
+            controller = new NetworkMetricsController(mocklog.Object, mock.Object);
         }
         [Fact]
         public void GetMetricsFromAgent_ReturnsOk()
@@ -126,11 +135,13 @@ namespace MetricsManagerTest
         public class DotNetMetricsControllerUnitTest
     {
         private Mock<ILogger<DotNetMetricsController>> mocklog;
+        private Mock<IAgentDotNetMetric> mock;
         private DotNetMetricsController controller;
         public DotNetMetricsControllerUnitTest()
         {
+            mock = new Mock<IAgentDotNetMetric>();
             mocklog = new Mock<ILogger<DotNetMetricsController>>();
-            controller = new DotNetMetricsController(mocklog.Object);
+            controller = new DotNetMetricsController(mocklog.Object, mock.Object);
         }
         [Fact]
         public void GetMetricsFromAgent_ReturnsOk()
